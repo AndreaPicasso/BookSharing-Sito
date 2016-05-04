@@ -5,8 +5,8 @@
 
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
-    $email = mysqli_real_escape_string($con,$_GET["email"]);
-    $id = trim(mysqli_real_escape_string($con,$_GET["idAccesso"]));
+    $email = mysqli_real_escape_string($con,$_POST["email"]);
+    $id = trim(mysqli_real_escape_string($con,$_POST["idAccesso"]));
     $psw = trim(mysqli_real_escape_string($con,$_GET["pswAccesso"]));
 
     

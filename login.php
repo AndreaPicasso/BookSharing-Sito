@@ -83,8 +83,8 @@
             mysqli_select_db($con,DB);
             $newPsw = generateRandomString();
             $query ="UPDATE user
-            SET password = '".$newPsw."' WHERE email='".$email."';";
-
+            SET password = '".sha1($newPsw)."' WHERE email='".$email."';";
+            $res = mysqli_query($con,$query);
             require("php/email.php");
             sendMail($email, "Richiesta Nuova Password", "E' avvenuta la richiesta per una nuova password.<br><br><b>Nuova Password:</b> ".$newPsw);
             echo '<script type="text/javascript">window.alert("E stata inviata una mail contenente la nuova password.")</script>';

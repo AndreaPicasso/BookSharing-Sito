@@ -97,7 +97,7 @@ if($ok && $submit)
         $query = "INSERT INTO user (email,nome,cognome,password) VALUES ('".$myEmail."','".$myName."','".$mySurname."','".$myPsw."');";
         $res = mysqli_query($con,$query);
         require("php/email.php");
-        sendMail($myEmail, "Iscrizione", "Congratulazioni!<br>".$myName." ".$mySurname."ti sei iscritto a BookSharing.");
+        sendMail($myEmail, "Iscrizione", "Congratulazioni!<br>".$myName." ".$mySurname." ti sei iscritto a BookSharing.");
        header("Location: index.php");
     }
     else

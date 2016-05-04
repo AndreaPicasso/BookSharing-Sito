@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.2.12deb2+deb8u1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Creato il: Apr 27, 2016 alle 22:05
--- Versione del server: 5.6.26
--- Versione PHP: 5.5.28
+-- Host: localhost
+-- Generation Time: Mag 03, 2016 alle 14:05
+-- Versione del server: 5.5.47-0+deb8u1
+-- PHP Version: 5.6.19-0+deb8u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `s3940125`
+-- Database: `S3940125`
 --
 
 -- --------------------------------------------------------
@@ -89,13 +89,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   `sesso` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `user`
+--
+
+INSERT INTO `user` (`email`, `nome`, `cognome`, `password`, `genere`, `sesso`) VALUES
+('andrea0pica@gmail.com', 'Andrea', 'Picasso', '005e73192fec2ec2eeac1e93ae204635c5c764fe', NULL, NULL),
+('ggg', 'beh', 'beh', '66fb801b995542a2148481d19b1ced71603b638b', NULL, NULL),
+('guido9494@gmail.com', 'Guido', 'Frocio', 'e85169d4ce04e0db7f47b0edaa9cbb31228b18ec', NULL, NULL),
+('simonemerello@hotmail.it', 'chiedi', 'chiedi', '32e0bada64b3c2c6fcc5e0df6fc07b547af7d00f', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `user_prova`
+-- Struttura della tabella `USER_PROVA`
 --
 
-CREATE TABLE IF NOT EXISTS `user_prova` (
+CREATE TABLE IF NOT EXISTS `USER_PROVA` (
   `email` varchar(50) NOT NULL,
   `nome` varchar(20) NOT NULL,
   `cognome` varchar(30) NOT NULL,
@@ -105,13 +115,11 @@ CREATE TABLE IF NOT EXISTS `user_prova` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dump dei dati per la tabella `user_prova`
+-- Dump dei dati per la tabella `USER_PROVA`
 --
 
-INSERT INTO `user_prova` (`email`, `nome`, `cognome`, `password`, `genere`, `sesso`) VALUES
-('a@a.it', 'Jonni', 'Merlo', 123, NULL, NULL),
-('dsfsdf@h.te', 'asdasd', 'asdasd', 40, NULL, NULL),
-('simonemerello@hotmail.it', 'asdr', 'asd', 40, NULL, NULL);
+INSERT INTO `USER_PROVA` (`email`, `nome`, `cognome`, `password`, `genere`, `sesso`) VALUES
+('a@a.it', 'Jonni', 'Merlo', 123, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,61 +134,50 @@ CREATE TABLE IF NOT EXISTS `valutazione` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `librocondiviso`
+-- Indexes for table `librocondiviso`
 --
 ALTER TABLE `librocondiviso`
-  ADD PRIMARY KEY (`isbn`,`proprietario`),
-  ADD KEY `isbn` (`isbn`),
-  ADD KEY `isbn_2` (`isbn`),
-  ADD KEY `proprietario` (`proprietario`);
+ ADD PRIMARY KEY (`isbn`,`proprietario`), ADD KEY `isbn` (`isbn`), ADD KEY `isbn_2` (`isbn`), ADD KEY `proprietario` (`proprietario`);
 
 --
--- Indici per le tabelle `message`
+-- Indexes for table `message`
 --
 ALTER TABLE `message`
-  ADD PRIMARY KEY (`datames`,`mittente`,`destinatario`),
-  ADD KEY `mittente` (`mittente`),
-  ADD KEY `destinatario` (`destinatario`);
+ ADD PRIMARY KEY (`datames`,`mittente`,`destinatario`), ADD KEY `mittente` (`mittente`), ADD KEY `destinatario` (`destinatario`);
 
 --
--- Indici per le tabelle `prenotazione`
+-- Indexes for table `prenotazione`
 --
 ALTER TABLE `prenotazione`
-  ADD PRIMARY KEY (`richiedente`,`isbn`,`proprietario`),
-  ADD KEY `proprietario` (`proprietario`),
-  ADD KEY `isbn` (`isbn`);
+ ADD PRIMARY KEY (`richiedente`,`isbn`,`proprietario`), ADD KEY `isbn` (`isbn`), ADD KEY `proprietario` (`proprietario`);
 
 --
--- Indici per le tabelle `prestiti`
+-- Indexes for table `prestiti`
 --
 ALTER TABLE `prestiti`
-  ADD PRIMARY KEY (`richiedente`,`dataprestito`,`proprietario`,`isbn`),
-  ADD KEY `proprietario` (`proprietario`),
-  ADD KEY `isbn` (`isbn`);
+ ADD PRIMARY KEY (`richiedente`,`dataprestito`,`proprietario`,`isbn`), ADD KEY `isbn` (`isbn`), ADD KEY `proprietario` (`proprietario`);
 
 --
--- Indici per le tabelle `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`email`),
-  ADD KEY `email` (`email`);
+ ADD PRIMARY KEY (`email`), ADD KEY `email` (`email`);
 
 --
--- Indici per le tabelle `user_prova`
+-- Indexes for table `USER_PROVA`
 --
-ALTER TABLE `user_prova`
-  ADD PRIMARY KEY (`email`);
+ALTER TABLE `USER_PROVA`
+ ADD PRIMARY KEY (`email`);
 
 --
--- Indici per le tabelle `valutazione`
+-- Indexes for table `valutazione`
 --
 ALTER TABLE `valutazione`
-  ADD PRIMARY KEY (`valutatore`,`valutato`),
-  ADD KEY `valutato` (`valutato`);
+ ADD PRIMARY KEY (`valutatore`,`valutato`), ADD KEY `valutato` (`valutato`);
 
 --
 -- Limiti per le tabelle scaricate
@@ -190,37 +187,40 @@ ALTER TABLE `valutazione`
 -- Limiti per la tabella `librocondiviso`
 --
 ALTER TABLE `librocondiviso`
-  ADD CONSTRAINT `librocondiviso_ibfk_1` FOREIGN KEY (`proprietario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `librocondiviso_ibfk_1` FOREIGN KEY (`proprietario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`mittente`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`destinatario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`destinatario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`mittente`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `prenotazione`
 --
 ALTER TABLE `prenotazione`
-  ADD CONSTRAINT `prenotazione_ibfk_1` FOREIGN KEY (`richiedente`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prenotazione_ibfk_2` FOREIGN KEY (`proprietario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prenotazione_ibfk_3` FOREIGN KEY (`isbn`) REFERENCES `librocondiviso` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `prenotazione_ibfk_7` FOREIGN KEY (`proprietario`) REFERENCES `librocondiviso` (`proprietario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prenotazione_ibfk_1` FOREIGN KEY (`richiedente`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prenotazione_ibfk_3` FOREIGN KEY (`isbn`) REFERENCES `librocondiviso` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prenotazione_ibfk_4` FOREIGN KEY (`proprietario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prenotazione_ibfk_5` FOREIGN KEY (`proprietario`) REFERENCES `librocondiviso` (`proprietario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prenotazione_ibfk_6` FOREIGN KEY (`proprietario`) REFERENCES `librocondiviso` (`proprietario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `prestiti`
 --
 ALTER TABLE `prestiti`
-  ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`richiedente`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestiti_ibfk_2` FOREIGN KEY (`proprietario`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestiti_ibfk_3` FOREIGN KEY (`isbn`) REFERENCES `librocondiviso` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `prestiti_ibfk_4` FOREIGN KEY (`proprietario`) REFERENCES `librocondiviso` (`proprietario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prestiti_ibfk_1` FOREIGN KEY (`richiedente`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `prestiti_ibfk_3` FOREIGN KEY (`isbn`) REFERENCES `librocondiviso` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `valutazione`
 --
 ALTER TABLE `valutazione`
-  ADD CONSTRAINT `valutazione_ibfk_1` FOREIGN KEY (`valutatore`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `valutazione_ibfk_2` FOREIGN KEY (`valutato`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `valutazione_ibfk_2` FOREIGN KEY (`valutato`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `valutazione_ibfk_1` FOREIGN KEY (`valutatore`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

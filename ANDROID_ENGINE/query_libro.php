@@ -1,21 +1,19 @@
 
 <?php
+    session_start()
+    if(isset($_SESSION['loginAndroid'])){
     require("../php/parameters.php");
-
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
-    $isbn = mysqli_real_escape_string($con,$_GET["isbn"]);
-    $id = trim(mysqli_real_escape_string($con,$_GET["idAccesso"]));
-    
-    $pswAccesso = trim(mysqli_real_escape_string($con,$_GET["pswAccesso"]));
+    $isbn = mysqli_real_escape_string($con,$_POST["isbn"]);
 
     
    // /!\  MODIFICARE LA TABELLA IN user
     $query = "SELECT * FROM librocondiviso WHERE isbn='".$isbn."';";
     $res = mysqli_query($con,$query);
     $rowcount = mysqli_num_rows($res);
-    $item = array('error' =>'?');
-    if($rowcount!=0 && strcmp($id,USER)==0 && strcmp($pswAccesso,PSW)==0){
+    $item = array('error' =>'Nessun libro con tale ISBN');
+    if($rowcount!=0){
         $item = array();
         for($i=0;$i<$rowcount; $i++){
             
@@ -33,7 +31,10 @@
         'number' => $rowcount,
         'items'  =>  $item
     );
-
+    }
+    else{
+        $response = array('error' =>'Non sei connesso al server');
+    }
     echo json_encode($response);
    
 
