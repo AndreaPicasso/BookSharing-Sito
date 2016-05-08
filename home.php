@@ -12,13 +12,13 @@
         <?php include("parts/header.php") ?>
         <div id="container">
             <div id="content">
-                contenuto
-                
-                <div id="cerca">
-                cerca
-                </div>
+               <?php include("parts/slider.php") ?>
+
             </div>
-            
+                <div id="cerca">
+                    Esegui la tua ricerca..
+                </div>
+        </div>  
         </div>
     </div>
     

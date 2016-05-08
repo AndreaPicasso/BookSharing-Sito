@@ -1,22 +1,21 @@
 <?php
-    session_start();
-    //if((isset($_SESSION['loginAndroid']) && strcmp($_SESSION['loginAndroid'],"true")==0) || isset($_GET['simone'])){
-    if((isset($_POST['pswAccesso']) && strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0) || isset($_GET['simone'])){
-        require("../php/parameters.php");
+        
+    function riempiSlider($isbn, $minLat,$maxLat,$minLon,$maxLon,$disponibili){
+        require("php/parameters.php");
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
         
-        //ISBN
-        if(isset($_POST["isbn"])){
+        echo '<script type="text/javascript">
+                document.getElementById("slider").innerHTML="";</script>';
+        if(strcmp($isbn,"")!=0){
             $isbn = mysqli_real_escape_string($con,$_POST["isbn"]);
             $isbn = " isbn ='".$isbn."'";
         }
-        else
-            $isbn="";
-        
-        
         //POSIZIONE
-        if(isset($_POST['minLat'], $_POST["minLon"], $_POST['maxLat'], $_POST["maxLon"])){
+        if(strcmp($minLat,"")!=0 &&
+            strcmp($maxLat,"")!=0 &&
+          strcmp($minLon,"")!=0 &&
+          strcmp($maxLon,"")!=0){
             $minLat = mysqli_real_escape_string($con,$_POST["minLat"]);
             $minLon = mysqli_real_escape_string($con,$_POST["minLon"]);
             $maxLat = mysqli_real_escape_string($con,$_POST["maxLat"]);
@@ -28,9 +27,8 @@
             $checkPos="";
         }
         
-        if(isset($_POST["disponibili"]) && strcmp(trim($_POST["disponibili"]),'true')==0){
+        if(!strcmp($disponibili,""))
             $disponibili = " NOT EXISTS(SELECT * FROM prestiti)";
-            }
         else
             $disponibili="";
         
@@ -55,46 +53,45 @@
             $cond = "WHERE ".$disponibili;
         if(!$isSetIsbn && !$isSetPos && !$isSetDisp)
             $cond = "";
-        
-        
-        
-
-        
         $query = "SELECT * FROM librocondiviso ".$cond.";";
         
-    
         $res = mysqli_query($con,$query);
         if($res){
-        $rowcount = mysqli_num_rows($res);
-        $item = array('error' =>'Nessun libro trovato');
-        if($rowcount!=0){
-            $item = array();
-            for($i=0;$i<$rowcount; $i++){
-
-                $row = mysqli_fetch_assoc($res);
-                $temp = array(
-                        'isbn' => $row['isbn'],
-                        'proprietario' => $row['proprietario'],
-                        'lat' => $row['latitudine'],
-                        'lon' => $row['longitudine'],
-                        'datacondivisione' => $row['datacondivisione']
-                );
-                array_push($item, $temp);
+            $rowcount = mysqli_num_rows($res);
+            if($rowcount!=0){
+                for($i=0;$i<$rowcount; $i++){
+                    $row = mysqli_fetch_assoc($res);
+                     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:',$row['isbn'].'&callback=handleResponse"></script>';
             }
         }
-        $response = array(
-            'number' => $rowcount,
-            'items'  =>  $item
-        );
-        }
-        else
-            $response = array('error' =>'Query Error');
-    }
-    else{
-        $response = array('error' =>'Non sei connesso al server');
-    }
-    echo json_encode($response);
-   
 
+    }
+    }
+    ?>
+    
 
-?>
+  <script type="text/javascript">
+        function handleResponse(response) {
+           $slider = document.getElementById("slider");
+            var item = response.items[0];
+            if(item.volumeInfo.hasOwnProperty("imageLinks"))
+                $copertina = item.volumeInfo.imageLinks.thumbnail;
+            else
+                $copertina = "../res/not_available.png";
+    
+        slider.innerHTML += "<div style='display: none;'><img data-u='image' src='"+$copertina+"'/></div>";
+        //SETTARE ONCLICK....
+        jssor_1_slider_init();
+
+        
+                
+                /*
+        document.getElementById("titolo").innerHTML= item.volumeInfo.title;
+        document.getElementById("genere").innerHTML += item.volumeInfo.categories[0];
+        var w= document.getElementById("copertina").clientWidth;
+        var h = document.getElementById("copertina").clientHeight;
+            console.log("Titolo: "+w+" "+h);
+        document.getElementById("copertina").innerHTML=  '<img alt="copertina" src="'+item.volumeInfo.imageLinks.thumbnail+'" width="'+w+'" height="'+h+'">';
+            */
+    }
+</script>

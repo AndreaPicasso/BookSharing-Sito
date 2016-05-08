@@ -4,7 +4,7 @@
 
 
 
-#content{
+#container{
     background-color: white;
     min-height: 70vh;
     width: 70vw;
@@ -14,7 +14,7 @@
     margin-right: 15vw;
 }
 
-#container{
+#content{
     width: 100%;
     display: inline-block;
     margin-top: 3%;

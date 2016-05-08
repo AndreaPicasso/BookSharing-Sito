@@ -7,7 +7,8 @@
 </head>
     
 <body>
-        <!-- connessione / sessione... -->
+        
+        <? php require("php/privateSectionsControl.php"); ?>
         <?php include("parts/header.php") ?>
         <?php
             if(!isset($_GET['isbn']))
