@@ -58,6 +58,8 @@
         $res = mysqli_query($con,$query);
         if($res){
             $rowcount = mysqli_num_rows($res);
+            $rowdim = $rowcount-1;
+            echo '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;</script>';
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
@@ -72,16 +74,21 @@
 
   <script type="text/javascript">
         function handleResponse(response) {
-           $slider = document.getElementById("slider");
+           slider = document.getElementById("slider");
             var item = response.items[0];
             if(item.volumeInfo.hasOwnProperty("imageLinks"))
-                $copertina = item.volumeInfo.imageLinks.thumbnail;
+                copertina = item.volumeInfo.imageLinks.thumbnail;
             else
-                $copertina = "../res/not_available.png";
+                copertina = "../res/not_available.png";
     
-        slider.innerHTML += "<div style='display: none;'><img data-u='image' src='"+$copertina+"'/></div>";
+        slider.innerHTML += "<div style='display: none;'><img data-u='image' src='"+copertina+"'/></div>";
         //SETTARE ONCLICK....
-        jssor_1_slider_init();
+        console.log("nLibri: "+nLibri);                    console.log("cont: "+cont);
+
+        if(cont!=nLibri)
+            cont++;
+        else
+            jssor_1_slider_init();
 
         
                 

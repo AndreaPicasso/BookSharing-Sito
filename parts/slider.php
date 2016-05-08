@@ -62,7 +62,7 @@
         </div>
 
     <script>
-        jssor_1_slider_init();
+            //jssor_1_slider_init();
     </script>
      <?php include("php/riempiSlider.php");
             riempiSlider("","","","","",""); ?>
