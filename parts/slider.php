@@ -6,7 +6,7 @@
             var jssor_1_options = {
               $AutoPlay: true,
               $AutoPlaySteps: 4,
-              $SlideDuration: 160,
+              $SlideDuration: 200,
               $SlideWidth: 100,
               $SlideSpacing: 50,
               $Cols: 4,

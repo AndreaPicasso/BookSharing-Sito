@@ -80,11 +80,11 @@
                 copertina = item.volumeInfo.imageLinks.thumbnail;
             else
                 copertina = "../res/not_available.png";
-    
-        slider.innerHTML += "<div style='display: none;'><img data-u='image' src='"+copertina+"'/></div>";
-        //SETTARE ONCLICK....
+        isbn = item.volumeInfo.industryIdentifiers[0].identifier;
+        slider.innerHTML += "<div style='display: none;'><img data-u='image' id='"+isbn+"' src='"+copertina+"' onclick='bookHandler(this)'/></div>";
+        /*
         console.log("nLibri: "+nLibri);                    console.log("cont: "+cont);
-
+        */
         if(cont!=nLibri)
             cont++;
         else
@@ -101,4 +101,10 @@
         document.getElementById("copertina").innerHTML=  '<img alt="copertina" src="'+item.volumeInfo.imageLinks.thumbnail+'" width="'+w+'" height="'+h+'">';
             */
     }
+      
+      function bookHandler(book){
+        window.location = 'book.php/?isbn='+book.id;
+          
+      }
+      
 </script>

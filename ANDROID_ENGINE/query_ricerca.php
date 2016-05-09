@@ -2,7 +2,7 @@
     session_start();
     //if((isset($_SESSION['loginAndroid']) && strcmp($_SESSION['loginAndroid'],"true")==0) || isset($_GET['simone'])){
     if((isset($_POST['pswAccesso']) && strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0) || isset($_GET['simone'])){
-        require("../php/parameters.php");
+        require_once("../php/parameters.php");
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
         
