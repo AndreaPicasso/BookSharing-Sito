@@ -81,7 +81,7 @@
             else
                 copertina = "../res/not_available.png";
         isbn = item.volumeInfo.industryIdentifiers[0].identifier;
-        slider.innerHTML += "<div style='display: none;'><img data-u='image' id='"+isbn+"' src='"+copertina+"' onclick='bookHandler(this)'/></div>";
+        slider.innerHTML += "<div style='display: none;'><a href='book.php/?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
         /*
         console.log("nLibri: "+nLibri);                    console.log("cont: "+cont);
         */
@@ -101,10 +101,18 @@
         document.getElementById("copertina").innerHTML=  '<img alt="copertina" src="'+item.volumeInfo.imageLinks.thumbnail+'" width="'+w+'" height="'+h+'">';
             */
     }
-      
+     
+      /* AJAX
       function bookHandler(book){
+          var xhttp = new XMLHttpRequest();
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+       // Action to be performed when the document is read;
+        }
+      };
+      xhttp.open("GET", "filename", true);
+      xhttp.send();
         window.location = 'book.php/?isbn='+book.id;
           
       }
-      
+      */
 </script>

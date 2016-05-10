@@ -1,5 +1,5 @@
 <div id="header">
             <div id ="logo">
-            <img src="res/scritta.png" alt="Logo"/>  
+            <img src="http://localhost/HomeSeria/res/scritta.png" alt="Logo"/>  
             </div>
 </div>
