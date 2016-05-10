@@ -1,0 +1,114 @@
+div{
+    transition: All 1s ease;
+    -webkit-transition: All 1s ease;
+    -moz-transition: All 1s ease;
+    -o-transition: All 1s ease;
+    -ms-transition: All 1s ease;
+}
+
+div:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+}
+
+
+
+#login{
+    position:absolute;
+    top:50%;
+    left:50%;
+    /* uso margini negativi pari a metà altezza/larghezza
+    per avere riferimento al centro del form */
+    margin-top:-25vh;
+    margin-left:-18vw;
+    width:36vw;
+    height: 50vh;
+    padding: 1%;
+
+    
+    /*al di sotto di 380px le scritte escono dai bordi */
+    min-height: 440px;
+    min-width: 470px;
+    
+    /* border*/
+    border-style:double;
+    border-color: white;
+    border-width:thick;
+    border-radius: 50px;
+    
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;     
+}
+
+
+
+#home{
+    position:absolute;
+    top:5%;
+    left:5%;
+    float: left;
+    padding: 2%;
+    
+    /* border*/
+    border-style: solid;
+    border-color: white;
+    border-width: thin;
+    border-radius: 20px;
+    
+    color: white;
+    font-size: 1.3vw;
+    text-align: center;
+    text-decoration: none; 
+    
+}
+
+
+
+/* Scritta login */
+h1{
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none; 
+    
+}
+
+
+/*------ TAVELLA CONTENENTE IL FORM ----*/
+table{
+    text-align: center;
+    width: 100%;
+}
+
+td{
+    text-align: center;
+    height: 5vh;
+    padding: 3%;
+}
+
+input[type=email], input[type=password]{
+    width: 22vw;
+    min-width: 380px;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 17px;
+    border: 0;
+}
+
+
+input[type=text]:hover, input[type=password]:hover{
+    box-shadow: 0px 0px 34px 2px #A4DEE3; 
+}
+
+a{
+    color: white;
+    text-decoration: none; 
+ 
+}
+a:hover{
+   font-size: 1.1em;
+}

@@ -1,0 +1,51 @@
+#content{
+    /* Centramento div
+        
+    */
+    position: absolute;
+    width: 80vw;
+    min-height: 50vh;
+    left: -40vw;   /* posiziono "il riferimento" a metà div -> faccio vedere solo metà div */
+    margin-left: 50%;   /* 50% di margin per spostare al centro dello schermo, rispetto al "riferimento" */
+    background-color: white;
+    
+    
+    border-radius: 3%;
+    margin-top: 1%;
+    padding: 3%;
+    
+}
+
+
+#copertina{
+    display: block;
+    border-radius: 3%;
+    top: 3vh;
+    left: 3vw;
+    float: left;
+    
+    
+    
+    height: 400px;
+    width: 300px;
+    background-color: aqua;
+    
+    
+}
+
+#titolo{
+    margin-left: 35vw; /*Non so perchè non lo prende */
+    display: block;
+    font-size: 4vw;
+    margin: auto;
+    
+}
+#descrizione{
+    display: inline-block;
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+#info{
+    display: inline-block;
+}

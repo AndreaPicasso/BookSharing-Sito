@@ -1,0 +1,82 @@
+
+/*---------------------------
+        PARTI PAGINA
+------------------------------
+*/
+
+
+/*------------PARTE SOPRA -------------*/
+#main{
+    height: 100vh;
+}
+
+#login{
+    margin-top: 1%;
+    margin-right: 5%;
+    float: right;
+    padding: 2%;
+    transition: All 1s ease;
+    -webkit-transition: All 1s ease;
+    -moz-transition: All 1s ease;
+    -o-transition: All 1s ease;
+    -ms-transition: All 1s ease;
+    
+    
+    
+    /* border*/
+    border-style: solid;
+    border-color: white;
+    border-width: thin;
+    border-radius: 20px;
+    
+    color: white;
+    font-size: 1.3vw;
+    text-align: center;
+    text-decoration: none; 
+}
+
+
+#login:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+}
+
+
+/*----------- PARTE SOTTO ------------*/
+#container{
+    padding: 0.5vh;
+    width: 100%;
+    display: inline-block;
+    height: 83%;
+}
+
+#linkutili{
+    float: left;
+    width:40%;
+    margin: auto;
+    padding: 5%;
+    height:100%;
+    
+}
+
+#linkutili a{
+    text-decoration: none;
+    color: white;
+    font-size: 2vw;
+}
+
+
+
+#frase{
+    padding: 5%;
+    color: white;
+    font-size: 5.5vw;  /*Anche il font size in vw, per adattarsi allo schermo*/
+    float: right;
+    width: 50%;
+    margin: auto;
+    height:100%;
+    text-shadow: #030303 0px 0px 13px;
+}

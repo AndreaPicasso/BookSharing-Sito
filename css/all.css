@@ -1,0 +1,85 @@
+    /*
+    1vh is equal to 1% of the viewport's height
+    1vw is equal to 1% of the viewport's width
+    */
+
+
+
+@font-face {
+    font-family: 'Cicle';
+    src: url(../res/cicle/Cicle_Semi.ttf) format('truetype');
+}
+
+* { 
+    /* RESET */
+    vertical-align: baseline;
+    font-weight: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    /* Font alternativo:
+    font-family: Verdana, Geneva, sans-serif;
+    */
+    font-family: 'Cicle',sans-serif;
+}
+
+
+body{
+    background-image: url("../res/back1.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    
+}
+
+
+div{
+    box-sizing: border-box;
+}
+
+
+
+/*---- per il singolo link ---*/
+.singlelink{
+    transition: All 1s ease;
+    -webkit-transition: All 1s ease;
+    -moz-transition: All 1s ease;
+    -o-transition: All 1s ease;
+    -ms-transition: All 1s ease;
+}
+#accountbutton{
+    float: right;
+    border-style: double;
+    border-color: red;
+    width: 20%;
+    height: 10%;
+        
+}
+
+.singlelink:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+}
+
+
+
+
+/*--------------- PARTI COMUNI ALLE PAGINE ---*/
+#header{
+    padding: 10px;
+    width: 100%;
+    display: inline-block;
+    height: 17%;
+}
+
+#logo{
+    padding-left: 4vw;
+    float: left;
+    margin-top: 1%;
+}
