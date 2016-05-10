@@ -50,6 +50,7 @@ div{
     -o-transition: All 1s ease;
     -ms-transition: All 1s ease;
 }
+
 #accountbutton{
     float: right;
     border-style: double;

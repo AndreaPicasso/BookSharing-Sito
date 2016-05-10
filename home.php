@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="css/home.css" type="text/css">
 </head>
 <body>
-      
+
+    <?php require("php/privateSectionsControl.php"); ?>
+
     <div id="main">
         
         <?php include("parts/header.php") ?>
@@ -15,6 +17,7 @@
                <?php include("parts/slider.php") ?>
             </div>
                 <div id="cerca">
+
                    <form  action="" method="post" >
                         <input type="text" id="titolo" name="titolo" placeholder="Titolo">
                         <input type="text" id="autore" name="autore" placeholder="Autore">       
@@ -25,6 +28,7 @@
                     </form>
                 </div>
          
+
         </div>
     </div>
     

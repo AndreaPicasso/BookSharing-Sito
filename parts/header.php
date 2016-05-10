@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
     function entraAccount(){
         window.location = 'account.php';
@@ -22,3 +23,10 @@
             </span>
 </div>
 
+=======
+<div id="header">
+            <div id ="logo">
+            <img src="res/scritta.png" alt="Logo"/>  
+            </div>
+</div>
+>>>>>>> 2a6e0df443812ee504db8a8c4e6c281173f50078
