@@ -1,0 +1,25 @@
+#account{
+    margin-top: 1%;
+    width: 100%;
+    height: 40%;
+    
+}
+
+#details{
+   
+    width: 60%;
+    height:100%;
+    float: left;
+    border-style: double;
+    border-color:black;  
+}
+
+#insertbook{
+    float: right;
+    width: 35%;
+    height: 100%;
+    border-style: double;
+    border-color: aqua;
+}
+
+#

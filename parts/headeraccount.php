@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 <script>
-    function entraAccount(){
-        window.location = 'account.php';
+    function esciAccount(){
+        window.location = 'home.php';
           
       }
     function logout(){
@@ -18,15 +17,7 @@
             </span>
             <span >
                 <input type="button" id="movebutton" value="LOGOUT" onClick="logout();">  
-               <input id="movebutton" type="button" value="ACCOUNT" onClick="entraAccount();">   
+               <input id="movebutton" type="button" value="HOME" onClick="esciAccount();">   
                  
             </span>
 </div>
-
-=======
-<div id="header">
-            <div id ="logo">
-            <img src="http://localhost/HomeSeria/res/scritta.png" alt="Logo"/>  
-            </div>
-</div>
->>>>>>> 2a6e0df443812ee504db8a8c4e6c281173f50078

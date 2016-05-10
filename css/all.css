@@ -51,6 +51,15 @@ div{
     -ms-transition: All 1s ease;
 }
 
+#accountbutton{
+    float: right;
+    border-style: double;
+    border-color: red;
+    width: 20%;
+    height: 10%;
+        
+}
+
 .singlelink:hover{
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
