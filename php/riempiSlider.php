@@ -64,7 +64,7 @@
             $rowcount = mysqli_num_rows($res);
             $rowdim = $rowcount-1;
             echo '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;</script>';
-            $books= new Array();
+            $books= array();
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
