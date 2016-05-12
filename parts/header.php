@@ -1,19 +1,19 @@
-<<<<<<< HEAD
+
 <script>
     function entraAccount(){
-        window.location = 'account.php';
+        window.location = 'http://localhost/HomeSeria/account.php';
           
       }
     function logout(){
-         window.location = 'index.php';
+         window.location = 'http://localhost/HomeSeria/index.php';
     }
         
     
 </script>
-<link rel="stylesheet" href="css/header.css" type="text/css">
+<link rel="stylesheet" href="http://localhost/HomeSeria/css/header.css" type="text/css">
 <div id="header">
             <span id ="logo">
-            <img src="res/scritta.png" alt="Logo"/> 
+            <img src="http://localhost/HomeSeria/res/scritta.png" alt="Logo"/> 
              
             </span>
             <span >
@@ -22,11 +22,3 @@
                  
             </span>
 </div>
-
-=======
-<div id="header">
-            <div id ="logo">
-            <img src="http://localhost/HomeSeria/res/scritta.png" alt="Logo"/>  
-            </div>
-</div>
->>>>>>> 2a6e0df443812ee504db8a8c4e6c281173f50078

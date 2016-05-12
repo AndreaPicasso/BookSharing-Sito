@@ -29,7 +29,7 @@
         }
         
         if(isset($_POST["disponibili"]) && strcmp(trim($_POST["disponibili"]),'true')==0){
-            $disponibili = " NOT EXISTS(SELECT * FROM prestiti)";
+            $disponibili = " isbn NOT IN(SELECT isbn FROM prestiti p WHERE p.proprietario= l.proprietario)";
             }
         else
             $disponibili="";
@@ -60,8 +60,7 @@
         
 
         
-        $query = "SELECT * FROM librocondiviso ".$cond.";";
-        
+        $query = "SELECT * FROM librocondiviso l ".$cond.";";
     
         $res = mysqli_query($con,$query);
         if($res){
@@ -72,12 +71,23 @@
             for($i=0;$i<$rowcount; $i++){
 
                 $row = mysqli_fetch_assoc($res);
+                $query_prestato = "SELECT * FROM librocondiviso WHERE isbn='".$row['isbn']."' 
+                                    AND proprietario='".$row['proprietario']."'
+                                    AND isbn NOT IN(SELECT isbn FROM prestiti WHERE proprietario='".$row['proprietario']."');";
+                $prest = mysqli_query($con,$query_prestato);
+                if(mysqli_num_rows($prest)==0){
+                    $prest="no";
+                }
+                else{
+                    $prest="si";
+                }
                 $temp = array(
                         'isbn' => $row['isbn'],
                         'proprietario' => $row['proprietario'],
                         'lat' => $row['latitudine'],
                         'lon' => $row['longitudine'],
-                        'datacondivisione' => $row['datacondivisione']
+                        'datacondivisione' => $row['datacondivisione'],
+                        'disponibile' => $prest
                 );
                 array_push($item, $temp);
             }

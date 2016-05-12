@@ -1,5 +1,7 @@
 <?php
-        
+        /* Global */
+        $books;
+
     function riempiSlider($isbn, $minLat,$maxLat,$minLon,$maxLon,$disponibili){
         require("php/parameters.php");
         $con = mysqli_connect(SERVER,USER,PSW);
@@ -57,13 +59,16 @@
         
         $res = mysqli_query($con,$query);
         if($res){
+            $books=$res;
             $rowcount = mysqli_num_rows($res);
             $rowdim = $rowcount-1;
             echo '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;</script>';
+            $books= new Array();
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
                      echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:',$row['isbn'].'&callback=handleResponse"></script>';
+
             }
         }
 

@@ -6,6 +6,8 @@
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
     $isbn = mysqli_real_escape_string($con,$_POST["isbn"]);
+    $propr = mysqli_real_escape_string($con,$_POST["proprietario"]);
+
 
     
    // /!\  MODIFICARE LA TABELLA IN user
