@@ -6,6 +6,7 @@
     function logout(){
          window.location = 'index.php';
     }
+    
         
     
 </script>
@@ -16,7 +17,8 @@
              
             </span>
             <span >
-                <input type="button" id="movebutton" value="LOGOUT" onClick="logout();">  
+                <input type="button" id="movebutton" value="LOGOUT" onClick="logout();"> 
+                 
                <input id="movebutton" type="button" value="HOME" onClick="esciAccount();">   
                  
             </span>

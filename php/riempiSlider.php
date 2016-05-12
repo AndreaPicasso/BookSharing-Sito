@@ -3,6 +3,7 @@
         $books;
 
     function riempiSlider($isbn, $minLat,$maxLat,$minLon,$maxLon,$disponibili){
+        //linko costanti da altro file
         require("php/parameters.php");
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
