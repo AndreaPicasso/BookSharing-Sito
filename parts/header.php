@@ -1,11 +1,11 @@
 
 <script>
     function entraAccount(){
-        window.location = 'http://localhost/HomeSeria/account.php';
+        window.location = '/HomeSeria/account.php';
           
       }
     function logout(){
-         window.location = 'http://localhost/HomeSeria/index.php';
+         window.location = '/HomeSeria/index.php';
     }
         
     

@@ -2,8 +2,11 @@
 <html>
 <head>
     <title>Book Sharing</title>
-    <link rel="stylesheet" href=" http://localhost/HomeSeria/css/all.css" type="text/css">
-    <link rel="stylesheet" href="http://localhost/HomeSeria/css/book.css" type="text/css">
+    <link rel="stylesheet" href="css/all.css" type="text/css">
+    <link rel="stylesheet" href="css/book.css" type="text/css">
+    <!--<link rel="stylesheet" href="/HomeSeria/css/all.css" type="text/css">
+    <link rel="stylesheet" href="/HomeSeria/css/book.css" type="text/css">
+-->
     <!--
     <link rel="stylesheet" href="css/all.css" type="text/css">
     <link rel="stylesheet" href="css/book.css" type="text/css">
