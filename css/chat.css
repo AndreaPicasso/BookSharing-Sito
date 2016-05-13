@@ -1,0 +1,81 @@
+#chatmessagesend{
+    float: right;
+    width:70%;
+    height: 15%;
+    background-color: green;
+    border-radius: 5px;
+    font-size: 15;
+    margin: 4%;
+    
+}
+#chatmessagerecieved{
+   float: left;
+   
+    width:70%;
+    height: 15%;
+    background-color: yellow;
+    border-radius: 5px;
+    
+    font-size: 15;
+     margin: 4%;
+    
+}
+#sendbutton{
+    background-color: limegreen;
+    text-align: center;
+    float: right;
+    vertical-align: bottom;
+    
+    padding: auto;
+    width: 8vw;
+    height: 4vh;
+    background-color: green;
+    font-size: 25;
+    border-radius: 5%;
+     margin: 3%;
+    
+}
+
+form{
+    width: 90%;
+    height: 90%;
+}
+#writemessage{
+    float:left;
+    vertical-align: bottom;
+    width: 60%;
+    height: 40%;
+}
+
+#chat{
+    float: left;
+    width: 65%;
+    height: 75%;
+    border-radius: 10px;
+     
+}
+#listelement1{
+    height: 10%;
+    width: 93%;
+    margin: 3%;
+    background-color: cadetblue;
+    font-size: 25;
+    
+}
+#listelement2{
+    height: 10%;
+    width: 93%;
+    margin: 3%;
+    background-color: chartreuse;
+    font-size: 25;
+    
+    
+}
+
+#chatlist{
+    float: right;
+    width: 30%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: bisque;
+}
