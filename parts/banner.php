@@ -1,10 +1,10 @@
 <script>
     function entraAccount(){
-        window.location = '/HomeSeria/account.php';
+        window.location = 'account.php';
           
       }
     function logout(){
-         window.location = '/HomeSeria/index.php';
+         window.location = 'index.php';
           
       }
 

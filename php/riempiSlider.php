@@ -86,7 +86,6 @@
                     $row = mysqli_fetch_assoc($res);
                      echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse"></script>';
                     
-                    echo 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore."<br>";
 
             }
         }

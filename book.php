@@ -1,14 +1,51 @@
-        <?php
-
-            if(!isset($_GET['isbn'])){
-               header("Location: index.php");  
+<?php     
+        if(!isset($_GET['isbn'])){
+               header("Location: ../index.php"); 
             }
         require("php/privateSectionsControl.php");
-        require("parts/header.php");    
-        require("parts/banner.php");
         ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Sharing</title>
+    <link rel="stylesheet" href="../css/all.css" type="text/css">    
+    <link rel="stylesheet" href="../css/book.css" type="text/css">
+    <link rel="stylesheet" href="../css/header.css" type="text/css">
 
+    
+</head>
+    
+<body>
+<script>
+    function entraAccount(){
+        window.location = '../account.php';
+          
+      }
+    function logout(){
+         window.location = '../index.php';
+          
+      }
 
+    function chat(){
+         window.location = '../chat.php';
+    }
+        
+    
+</script>
+<div id="header">
+            <span id ="logo">
+            <img src="../res/scritta.png" alt="Logo"/> 
+             
+            </span>
+            <span >
+               <input type="button" class="movebutton" value="LOGOUT" onClick="logout();">
+
+                 <input type="button" class="movebutton" value="CHAT" onClick="chat();"> 
+               <input class="movebutton" type="button" value="ACCOUNT" onClick="entraAccount();">  
+                  
+                 
+            </span>
+</div>
         
 
        <div id="content_book">
