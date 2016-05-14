@@ -1,32 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Book Sharing</title>
-    <link rel="stylesheet" href="css/all.css" type="text/css">
-    <link rel="stylesheet" href="css/book.css" type="text/css">
-    
-    
-<link rel="stylesheet" href="/HomeSeria/css/all.css" type="text/css">
-    <link rel="stylesheet" href="/HomeSeria/css/book.css" type="text/css">
-
-    <!--
-    <link rel="stylesheet" href="css/all.css" type="text/css">
-    <link rel="stylesheet" href="css/book.css" type="text/css">
-    -->
-</head>
-    
-<body>
-    
         <?php
+
             if(!isset($_GET['isbn'])){
                header("Location: index.php");  
             }
         require("php/privateSectionsControl.php");
-        require("parts/header.php");      
+        require("parts/header.php");    
+        require("parts/banner.php");
         ?>
+
+
         
 
-       <div id="content">
+       <div id="content_book">
            <div id="titolo">Titolo</div>
            <div id="copertina"> copertina</div>
 

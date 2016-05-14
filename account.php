@@ -1,18 +1,12 @@
-<html>
-  <head>
-    <title>Account</title>
-      <link rel="stylesheet" href="css/all.css" type="text/css">
-      <link rel="stylesheet" href="css/home.css" type="text/css">
-    <link rel="stylesheet" href="css/account.css" type="text/css">
-  </head>
-  <body>
-   <div id="main">
-        
-        <?php require("parts/headeraccount.php");
+    <?php       
+                require("parts/header.php");
+                require("parts/banner_account.php");
                 require("php/privateSectionsControl.php");
                 require("php/parameters.php");
-       ?>
-        <div id="container">
+       ?>  
+
+<div id="main">
+        <div id="container_home">
         <div id="account">
             <span id="details">
                 <form  action="#" method="post" >

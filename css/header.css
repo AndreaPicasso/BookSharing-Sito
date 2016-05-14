@@ -1,4 +1,4 @@
-#movebutton{
+.movebutton{
     margin-top: 3%;
     margin-right: 5%;
     float: right;
@@ -24,7 +24,7 @@
 }
 
 
-#movebutton:hover{
+.movebutton:hover{
     transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);

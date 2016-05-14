@@ -1,4 +1,4 @@
- <script type="text/javascript" src="slider/js/jssor.slider.min.js"></script>
+ 
     <!-- use jssor.slider.debug.js instead for debug -->
     <script>
         jssor_1_slider_init = function() {
@@ -61,8 +61,5 @@
         
         </div>
 
-    <script>
-            //jssor_1_slider_init();
-    </script>
      <?php include("php/riempiSlider.php");
-            riempiSlider("","","","","",""); ?>
+            ?>

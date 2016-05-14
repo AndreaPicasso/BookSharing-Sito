@@ -1,35 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <title>Book Sharing</title>
-    <link rel="stylesheet" href="css/all.css" type="text/css">
-    <link rel="stylesheet" href="css/home.css" type="text/css">
-</head>
-<body>
-
-    <?php require("php/privateSectionsControl.php"); ?>
+    <?php require("php/privateSectionsControl.php");
+            require("parts/header.php");
+            require("parts/banner.php");?>
 
     <div id="main">
-        
-        <?php include("parts/header.php") ?>
-        <div id="container">
-            <div id="content">
-               <?php include("parts/slider.php") ?>
+            <div id="container_home">
+            <div id="content_home">
+               <?php include("parts/slider.php"); ?>
             </div>
                 <div id="cerca">
 
-                   <form  action="" method="post" >
-                        <input type="text" id="titolo" name="titolo" placeholder="Titolo">
-                        <input type="text" id="autore" name="autore" placeholder="Autore">       
-                        <input type="text" id="isbn" name="isbn" placeholder="ISBN">
-                        <input type="checkbox" id="disponibile" value="Solo disponibili" name="disponibile" >
+                   <form class="form_home"  action="" method="post" >
+                        <input class="input_home" type="text" name="titolo" placeholder="Titolo">
+                        <input class="input_home" type="text" name="autore" placeholder="Autore">       
+                        <input class="input_home" type="text" name="isbn" placeholder="ISBN">
+                        <input class="input_home" type="checkbox" value="Solo disponibili" name="disponibile" >
                         <br>   
-                        <input  type="submit" id="movebutton" name="cerca" value="Cerca" >   
+                        <input  type="submit" class="movebutton" name="cerca" value="Cerca" >   
                     </form>
                 </div>
-         
-
         </div>
+        
+        <?php
+            if(isset($_POST['cerca'])){
+            riempiSlider($_POST['isbn'], $_POST["titolo"],$_POST["autore"],$_POST['disponibile']);
+            }
+        else
+            riempiSlider("","","","");
+        ?>
     
 </body>
 </html>

@@ -1,10 +1,10 @@
-#main{
+#main_home{
     min-height: 100vh;
 }
 
 
 
-#container{
+#container_home{
     background-color: white;
     min-height: 70vh;
     width: 70vw;
@@ -15,13 +15,13 @@
     margin-top: 2%;
     margin-right: 15vw;
 }
-form{
+.form_home{
     margin-top: 4%;
     
     
 }
 
-input{
+.input_home{
     margin-top: 3%;
     margin-left: 4%;
     margin-bottom: 3%;
@@ -61,7 +61,7 @@ input{
 }
 
 
-#content{
+#content_home{
     width: 100%;
     display: inline-block;
     margin-top: 3%;

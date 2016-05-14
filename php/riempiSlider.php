@@ -1,19 +1,22 @@
 <?php
         /* Global */
         $books;
-
-    function riempiSlider($isbn, $minLat,$maxLat,$minLon,$maxLon,$disponibili){
+    function riempiSlider($isbn,$titolo,$autore,$disponibili){
         //linko costanti da altro file
+        
         require("php/parameters.php");
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
         
         echo '<script type="text/javascript">
                 document.getElementById("slider").innerHTML="";</script>';
+                
+        
         if(strcmp($isbn,"")!=0){
             $isbn = mysqli_real_escape_string($con,$_POST["isbn"]);
             $isbn = " isbn ='".$isbn."'";
         }
+        /*
         //POSIZIONE
         if(strcmp($minLat,"")!=0 &&
             strcmp($maxLat,"")!=0 &&
@@ -29,9 +32,11 @@
         else{
             $checkPos="";
         }
+        */
+        $checkPos="";
         
         if(!strcmp($disponibili,""))
-            $disponibili = " NOT EXISTS(SELECT * FROM prestiti)";
+             $disponibili = " isbn NOT IN(SELECT isbn FROM prestiti p WHERE p.proprietario= l.proprietario)";
         else
             $disponibili="";
         
@@ -56,15 +61,19 @@
             $cond = "WHERE ".$disponibili;
         if(!$isSetIsbn && !$isSetPos && !$isSetDisp)
             $cond = "";
-        $query = "SELECT * FROM librocondiviso ".$cond.";";
+        
+
+        $query = "SELECT * FROM librocondiviso l ".$cond.";";
         
         $res = mysqli_query($con,$query);
         if($res){
             $books=$res;
             $rowcount = mysqli_num_rows($res);
             $rowdim = $rowcount-1;
-            echo '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;</script>';
-            $books= array();
+            $titolo = strtoupper(trim($titolo));
+            $autore = strtoupper(trim($autore));
+            echo    '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;
+                    titolo="'.$titolo.'"; autore="'.$autore.'"; </script>';
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
@@ -86,11 +95,24 @@
                 copertina = item.volumeInfo.imageLinks.thumbnail;
             else
                 copertina = "../res/not_available.png";
+            
         isbn = item.volumeInfo.industryIdentifiers[0].identifier;
-        slider.innerHTML += "<div style='display: none;'><a href='book.php/?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
-        /*
-        console.log("nLibri: "+nLibri);                    console.log("cont: "+cont);
-        */
+            
+         if(item.volumeInfo.hasOwnProperty("title"))
+                tit = item.volumeInfo.title;
+        else
+                tit="";
+         if(item.volumeInfo.hasOwnProperty("authors"))
+                aut =  item.volumeInfo.authors[0];
+        else
+                aut="";
+            
+        console.log("tit: "+tit.toUpperCase()+" titolo:"+titolo);
+            //Se non sono nella ricerca, aggiungi sempre il risultato, altrimenti controlla
+        if((titolo=="" && autore=="") || (titolo==tit && autore==aut))
+            
+            slider.innerHTML += "<div style='display: none;'><a href='book.php/?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+            
         if(cont!=nLibri)
             cont++;
         else
