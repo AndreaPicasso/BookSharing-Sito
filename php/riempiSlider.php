@@ -71,13 +71,22 @@
             $rowcount = mysqli_num_rows($res);
             $rowdim = $rowcount-1;
             $titolo = strtoupper(trim($titolo));
+            if(strcmp($titolo,"")!=0){
+                $titolo='+intitle:'.$titolo;
+            }
+             if(strcmp($autore,"")!=0){
+                $autore='+inauthor:'.$autore;
+            }
             $autore = strtoupper(trim($autore));
             echo    '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;
-                    titolo="'.$titolo.'"; autore="'.$autore.'"; </script>';
+                    </script>';
+            //titolo="'.$titolo.'"; autore="'.$autore.'"; 
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
-                     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:',$row['isbn'].'&callback=handleResponse"></script>';
+                     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse"></script>';
+                    
+                    echo 'https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore."<br>";
 
             }
         }
@@ -90,29 +99,15 @@
   <script type="text/javascript">
         function handleResponse(response) {
            slider = document.getElementById("slider");
+            if(response.totalItems!=0){
             var item = response.items[0];
-            if(item.volumeInfo.hasOwnProperty("imageLinks"))
-                copertina = item.volumeInfo.imageLinks.thumbnail;
-            else
-                copertina = "../res/not_available.png";
-            
-        isbn = item.volumeInfo.industryIdentifiers[0].identifier;
-            
-         if(item.volumeInfo.hasOwnProperty("title"))
-                tit = item.volumeInfo.title;
-        else
-                tit="";
-         if(item.volumeInfo.hasOwnProperty("authors"))
-                aut =  item.volumeInfo.authors[0];
-        else
-                aut="";
-            
-        console.log("tit: "+tit.toUpperCase()+" titolo:"+titolo);
-            //Se non sono nella ricerca, aggiungi sempre il risultato, altrimenti controlla
-        if((titolo=="" && autore=="") || (titolo==tit && autore==aut))
-            
-            slider.innerHTML += "<div style='display: none;'><a href='book.php/?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
-            
+                if(item.volumeInfo.hasOwnProperty("imageLinks"))
+                    copertina = item.volumeInfo.imageLinks.thumbnail;
+                else
+                    copertina = "../res/not_available.png";
+                isbn = item.volumeInfo.industryIdentifiers[0].identifier;
+                    slider.innerHTML += "<div style='display: none;'><a href='book.php/?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+            }
         if(cont!=nLibri)
             cont++;
         else

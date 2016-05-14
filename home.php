@@ -22,7 +22,12 @@
         
         <?php
             if(isset($_POST['cerca'])){
-            riempiSlider($_POST['isbn'], $_POST["titolo"],$_POST["autore"],$_POST['disponibile']);
+                if(isset($_POST['disponibile']))
+                    $disp=true;
+                else
+                    $disp="";
+
+            riempiSlider($_POST['isbn'], $_POST["titolo"],$_POST["autore"],$disp);
             }
         else
             riempiSlider("","","","");
