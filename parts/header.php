@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/book.css" type="text/css">
     <link rel="stylesheet" href="css/home.css" type="text/css">
     <link rel="stylesheet" href="css/header.css" type="text/css">
+    <link rel="stylesheet" href="css/chat.css" type="text/css">
 
 
 

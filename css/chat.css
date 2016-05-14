@@ -6,11 +6,12 @@
     border-radius: 5px;
     font-size: 15;
     margin: 4%;
+    padding: 2%;
     
 }
 #chatmessagerecieved{
    float: left;
-   
+    padding: 2%;
     width:70%;
     height: 15%;
     background-color: yellow;
@@ -36,10 +37,6 @@
     
 }
 
-form{
-    width: 90%;
-    height: 90%;
-}
 #writemessage{
     float:left;
     vertical-align: bottom;

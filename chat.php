@@ -1,16 +1,10 @@
-<html>
-  <head>
-    <title>Account</title>
-      <link rel="stylesheet" href="css/all.css" type="text/css">
-      <link rel="stylesheet" href="css/chat.css" type="text/css">
-      <link rel="stylesheet" href="css/home.css" type="text/css">
-    <link rel="stylesheet" href="css/account.css" type="text/css">
-  </head>
-  <body>
+<?php   
+require("php/privateSectionsControl.php");
+require("parts/header.php"); ?>
+
    <div id="main">
-        
-        <?php include("parts/headeraccount.php") ?>
-        <div id="container">
+        <?php require("parts/banner_account.php"); ?>
+        <div id="container_home">
             <span id="chat">
                 <div id="chatmessagesend">
                     Messaggio inviato
