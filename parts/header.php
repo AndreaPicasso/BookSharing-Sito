@@ -9,11 +9,14 @@
     <link rel="stylesheet" href="css/home.css" type="text/css">
     <link rel="stylesheet" href="css/header.css" type="text/css">
     <link rel="stylesheet" href="css/chat.css" type="text/css">
+    
 
 
 
     
     <script type="text/javascript" src="slider/js/jssor.slider.min.js"></script>
+    <script type="text/javascript" src="js/ajaxFunction.js"></script>
+
 
     
 </head>
