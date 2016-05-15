@@ -42,6 +42,10 @@
     vertical-align: bottom;
         width: 100%;
         height: 15%;
+    padding: 2%;
+    border-radius: 2%;
+    border: 2px;
+    border-style: double;
 }
 
 #chat_content{

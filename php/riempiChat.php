@@ -13,7 +13,7 @@
     $query =    'SELECT * FROM `message` 
                 WHERE (mittente="'.$email.'" AND destinatario ="'.$other.'") OR
                 (destinatario="'.$email.'" AND mittente ="'.$other.'")
-                ORDER BY datames DESC; ';
+                ORDER BY datames ; ';
     $res = mysqli_query($con,$query);
     $numrows= mysqli_num_rows($res);
     for($i = 0; $i<$numrows; $i++){

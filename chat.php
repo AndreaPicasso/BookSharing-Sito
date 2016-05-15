@@ -18,7 +18,8 @@ require("parts/header.php");
                      -->
                 </span>
                 <div id="writemessage">
-                    <form  action="" method="post" >
+                    <form  action="#" method="post" >
+                        Destinatario: <input readonly="text" id="destinatario" name="destinatario" value="">
                         <input type="text" id="message" name="message" placeholder="Scrivi qui il tuo messaggio">
                        
                         <br>   
@@ -38,6 +39,8 @@ require("parts/header.php");
     <script type="text/javascript">
         /* CHIAMATA AJAX */
         function riempiChat(other) {
+        var dest = document.getElementById("destinatario");
+            dest.value =other;
         var chat = document.getElementById("chat_content");
         chat.innerHTML = synchcall(other);  
     }
@@ -63,7 +66,9 @@ require("parts/header.php");
     </script>
   </body>
 
+
 <?php
+    //set up page
     function addChat(){
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
@@ -82,6 +87,11 @@ require("parts/header.php");
         $numrows= mysqli_num_rows($res);
         for($i = 0; $i<$numrows; $i++){
             $row = mysqli_fetch_assoc($res);
+             //Riempi la chat con il primo
+            /*
+            if($i==0)
+                $toShow = $row['destinatario'];
+                */
             $mod = $i%2;
             echo '<div class="listelement'.$mod.'" onclick="riempiChat(\''.$row['destinatario'].'\')">'.$row['destinatario'].'</div>';
         }
@@ -94,29 +104,32 @@ require("parts/header.php");
         }
     }
 
+?>
 
-
-    /*
-    function ajaxRiempiChat($other){
-        $email = $_SESSION['email'];
-        $query = 'SELECT *
-        FROM message
-        WHERE (mittente="'.$email.'" AND destinatario="'.$other.'")
-        OR (destinatario="'.$email.'" AND mittente="'.$other.'")
-        ORDER BY datames;';
-        $res = mysqli_query($con,$query);
-        $numrows= mysqli_num_rows($res);
-        for($i = 0; $i<$numrows; $i++){
-            $row = mysqli_fetch_assoc($res);
-            if(strcmp($row['destinatario'],$email)==0){
-                $id="chatmessagerecieved";
-            }
-            else{   
-                $id="chatmessagesend";
-            }
-            echo '<div id="'.$id.'">'.$row['testo'].'</div>';
-        }
+<?php
+ //send message
+if(isset($_POST['sendbutton'])){
+    $text = $_POST['message'];
+    $dest = $_POST['destinatario'];
+    $email = $_SESSION['email'];
+    $ok=true;
+    if(strcmp($dest,"")==0){
+        echo '<script type="text/javascript">window.alert("Nessun destinatario selezionato")</script>';
+        $ok = false;
     }
-    */
+    if(strcmp($text,"")==0){
+        echo '<script type="text/javascript">window.alert("Impossibile inviare un messaggio vuoto")</script>';
+        $ok=false;
+    }
+    if($ok){
+         $con = mysqli_connect(SERVER,USER,PSW);
+        mysqli_select_db($con,DB);
+        $text = mysqli_real_escape_string($con,$text);
+        $query = "INSERT INTO message (mittente, destinatario, testo, datames) VALUES ('".$email."','".$dest."','".$text."',FROM_UNIXTIME(".time()."));";
+        $res = mysqli_query($con,$query);
+        echo '<script type="text/javascript">riempiChat(\''.$dest.'\')</script>';
+    }
+}
+
 ?>
 </html>
