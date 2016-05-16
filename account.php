@@ -40,24 +40,20 @@
             </form>
             </span>
             <span id="insertbook">
-                <form action="" method="post">
+                <form action="#" method="post">
                     <input type="text" id="isbn" name="isbn" placeholder="ISBN">
                     <input type="submit" id="inseriscilibro" name="inseriscilibro" value="Inserisci un nuovo libro"> 
                 </form>
             </span>
          </div>
-        <p> "LIBRI IN LETTURA</p>  
-            <div >
+            <div style="width:100%;">
+            LIBRI IN LETTURA
             </div>  
-        <p> "LIBRI IN PRESTITO</p> 
-            <div >
+            <div style="width:100%;">
+            LIBRI IN PRESTITO
             </div>    
-   
-    
-    
     </div>
-         
-    </div>
+</div>
     
       <?php
       //---------------- MODIFICA DATI -----------------------
@@ -114,5 +110,20 @@
         mysqli_close($con);
       }
       ?>
+
+
+    <?php
+    //--------------- INSERISCI LIBRO
+    if(isset($_POST['inseriscilibro'])){
+        $isbn = $_POST['isbn'];
+        if(!strcmp(trim($isbn),"")){
+            // Cerco il libro su google con http request per vedere se è un isbn sensato, e poi lo inseriscoS
+        }
+        else
+        {
+            echo '<script type="text/javascript">window.alert("ISBN vuoto")</script>';   
+        }
+    }
+    ?>
   </body>
 </html>
