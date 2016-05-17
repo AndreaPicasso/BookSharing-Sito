@@ -2,51 +2,12 @@
         if(!isset($_GET['isbn'])){
                header("Location: ../index.php"); 
             }
+        require("parts/header.php");
+        require("parts/banner_account.php");
         require("php/privateSectionsControl.php");
+        require("php/parameters.php");
         ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Book Sharing</title>
-    <link rel="stylesheet" href="../css/all.css" type="text/css">    
-    <link rel="stylesheet" href="../css/book.css" type="text/css">
-    <link rel="stylesheet" href="../css/header.css" type="text/css">
 
-    
-</head>
-    
-<body>
-<script>
-    function entraAccount(){
-        window.location = '../account.php';
-          
-      }
-    function logout(){
-         window.location = '../index.php';
-          
-      }
-
-    function chat(){
-         window.location = '../chat.php';
-    }
-        
-    
-</script>
-<div id="header">
-            <span id ="logo">
-            <img src="../res/scritta.png" alt="Logo"/> 
-             
-            </span>
-            <span >
-               <input type="button" class="movebutton" value="LOGOUT" onClick="logout();">
-
-                 <input type="button" class="movebutton" value="CHAT" onClick="chat();"> 
-               <input class="movebutton" type="button" value="ACCOUNT" onClick="entraAccount();">  
-                  
-                 
-            </span>
-</div>
-        
 
        <div id="content_book">
            <div id="titolo">Titolo</div>
@@ -79,16 +40,23 @@
         var w= document.getElementById("copertina").clientWidth;
         var h = document.getElementById("copertina").clientHeight;
         document.getElementById("copertina").innerHTML=  '<img alt="copertina" src="'+item.volumeInfo.imageLinks.thumbnail+'" width="'+w+'" height="'+h+'">';
-
-
       
-    }
+        }
+        function handleMapsResponse(response){
+            var item = response.results[0];
+            document.getElementById("luogo").innerHTML += item.formatted_address;
+        }
     </script>
     <?php
      echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_GET['isbn'].'&callback=handleResponse"></script>';
-    
-    
-    
+    $con = mysqli_connect(SERVER,USER,PSW);
+    mysqli_select_db($con,DB);
+    $email = $_SESSION["email"];
+    $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."' AND proprietario='".$email."';";
+    $res = mysqli_query($con,$query);
+    $libro = mysqli_fetch_assoc($res);
+    echo '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/geocode/json?latlng='.$libro['latitudine'].','.$libro['longitudine'].'&callback=handleMapsResponse"></script>';
+        
     ?>
     
 </body>

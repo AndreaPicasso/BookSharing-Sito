@@ -105,7 +105,7 @@
                 else
                     copertina = "../res/not_available.png";
                 isbn = item.volumeInfo.industryIdentifiers[0].identifier;
-                    slider.innerHTML += "<div style='display: none;'><a href='book.php/?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+                    slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
             }
         if(cont!=nLibri)
             cont++;
