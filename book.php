@@ -42,10 +42,7 @@
         document.getElementById("copertina").innerHTML=  '<img alt="copertina" src="'+item.volumeInfo.imageLinks.thumbnail+'" width="'+w+'" height="'+h+'">';
       
         }
-        function handleMapsResponse(response){
-            var item = response.results[0];
-            document.getElementById("luogo").innerHTML += item.formatted_address;
-        }
+        
     </script>
     <?php
      echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_GET['isbn'].'&callback=handleResponse"></script>';
@@ -55,11 +52,32 @@
     $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."' AND proprietario='".$email."';";
     $res = mysqli_query($con,$query);
     $libro = mysqli_fetch_assoc($res);
-    echo '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/geocode/json?latlng='.$libro['latitudine'].','.$libro['longitudine'].'&callback=handleMapsResponse"></script>';
-        
+    
+    //----- OTTENGO INDIRIZZO------
+    $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$libro['latitudine'].",".$libro['longitudine'];
+    $resp_json = file_get_contents($url);
+    $resp = json_decode($resp_json, true);
+    $formatted_address = $resp['results'][0]['formatted_address'];
+    echo '<script>document.getElementById("luogo").innerHTML += "'.$formatted_address.'";</script>';
+
+    //----OTTENGO STATO PRESTITATO/NO -----
+    $query = "SELECT *
+    FROM librocondiviso INNER JOIN prestiti
+    ON librocondiviso.isbn = prestiti.isbn AND librocondiviso.proprietario = prestiti.proprietario
+    WHERE librocondiviso.isbn='".$_GET['isbn']."' AND librocondiviso.proprietario='".$email."';";
+    $res = mysqli_query($con,$query);
+    $rowcount = mysqli_num_rows($res);
+    if($rowcount!=0){
+        echo '<script>document.getElementById("stato").innerHTML += "Prestato";
+        document.getElementById("prenotazione").innerHTML = "Avvisami appena disponibile";
+        </script>';
+    }
+    else{
+        echo '<script>document.getElementById("stato").innerHTML += "Disponibile";
+        document.getElementById("prenotazione").innerHTML = "Prenota";</script>';
+    }
+
     ?>
     
 </body>
-
-
 </html>
