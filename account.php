@@ -41,7 +41,7 @@
             </span>
             <span id="insertbook">
                 <form action="#" method="post">
-                    <input type="text" id="isbn" name="isbn" placeholder="ISBN">
+                    <input type="text" id="isbn" name="isbn" placeholder="ISBN" onclick="">
                     <input type="submit" id="inseriscilibro" name="inseriscilibro" value="Inserisci un nuovo libro"> 
                 </form>
             </span>
@@ -112,12 +112,63 @@
       ?>
 
 
+
+    
+    <script type="text/javascript">
+        //--------------- INSERISCI LIBRO
+        /*
+        1) php, prendo la richiesta
+        2) verifico su google se il libro esiste
+        3) prendo la posizione corrente
+        4) faccio una chiamata AJAX per inserire il libro
+        */
+        function handleResponse(response) {
+        if(response.totalItems!=0){
+                isbn = response.items[0].volumeInfo.industryIdentifiers[0].identifier;
+                console.log(isbn);
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(asyncCall);
+                } else { 
+                    window.alert("Geolocazizzazione non supportata.");
+                }
+        }
+        else{
+                  window.alert("ISBN non trovato.");
+        }
+        
+    }
+        
+    function asyncCall(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    //console.log(lat+" "+lon);
+                    xhr = getXMLHttpRequestObject();
+                    var url = 'php/addBook.php?isbn='+isbn+'&lat='+lat+'&lon='+lon;
+                    xhr.onreadystatechange = alertContents;
+                    xhr.open('GET', url, true);
+                    xhr.send();
+    }
+        
+    function alertContents() {
+        if (xhr.readyState == 4) {
+                 if (xhr.status == 200) {
+                    window.alert(xhr.response);
+                  }
+                  else {
+                    alert('There was a problem with the request.');
+                 }    
+            }
+        }
+
+    </script>
+
     <?php
-    //--------------- INSERISCI LIBRO
+    
     if(isset($_POST['inseriscilibro'])){
         $isbn = $_POST['isbn'];
-        if(!strcmp(trim($isbn),"")){
-            // Cerco il libro su google con http request per vedere se è un isbn sensato, e poi lo inseriscoS
+        if(!strcmp(trim($isbn),"")==0){
+            echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$isbn.'&callback=handleResponse">
+            </script>';
         }
         else
         {
@@ -125,5 +176,6 @@
         }
     }
     ?>
+
   </body>
 </html>

@@ -49,7 +49,7 @@ require("parts/header.php");
             
         xhr = getXMLHttpRequestObject();
 
-        xhr.open("POST", "php/riempiChat.php/?other="+other, false);
+        xhr.open("GET", "php/riempiChat.php/?other="+other, false);
 
             xhr.send(); 
  

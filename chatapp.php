@@ -3,7 +3,14 @@
  require("php/parameters.php");?>
 
    <div id="main">
-        <?php require("parts/banner_account.php"); ?>
+        <?php
+       require("parts/header.php");
+       
+        if(!isset($_POST['pswAccesso']) || !strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0 || !isset($_POST['email'])){
+            header("Location: index.php");
+            }
+            
+             ?>
         <div id="container_home">
             <span id="chat_container">
                  <span id="chat_content">
@@ -37,18 +44,19 @@
 
     <script type="text/javascript">
         /* CHIAMATA AJAX */
-        function riempiChat(other) {
+        function riempiChat(other,user) {
+            console.log("ok");
         var dest = document.getElementById("destinatario");
             dest.value =other;
         var chat = document.getElementById("chat_content");
-        chat.innerHTML = synchcall(other);  
+        chat.innerHTML = synchcall(other,user);  
     }
 
-        function synchcall(other) {  
+        function synchcall(other,user) {  
             
         xhr = getXMLHttpRequestObject();
 
-        xhr.open("POST", "php/riempiChat.php/?other="+other, false);
+        xhr.open("POST", "php/riempiChatapp.php/?other="+other+"&email="+user, false);
 
             xhr.send(); 
  
@@ -71,7 +79,8 @@
     function addChat(){
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
-        $email = $_SESSION['email'];
+        $email = $_POST['email'];
+        //$email = $_GET['email'];
         $query_mittente = 'SELECT DISTINCT destinatario
                 FROM message
                 WHERE mittente="'.$email.'" ;';
@@ -92,14 +101,14 @@
                 $toShow = $row['destinatario'];
                 */
             $mod = $i%2;
-            echo '<div class="listelement'.$mod.'" onclick="riempiChat(\''.$row['destinatario'].'\')">'.$row['destinatario'].'</div>';
+            echo '<div class="listelement'.$mod.'" onclick="riempiChat(\''.$row['destinatario'].'\',\''.$email.'\')">'.$row['destinatario'].'</div>';
         }
         $res = mysqli_query($con,$query_destinatario);
         $numrows= mysqli_num_rows($res);
         for($i = 0; $i<$numrows; $i++){
             $row = mysqli_fetch_assoc($res);
             $mod = $i%2;
-            echo '<div class="listelement'.$mod.'" onclick="riempiChat(\''.$row['mittente'].'\')">'.$row['mittente'].'</div>';
+            echo '<div class="listelement'.$mod.'" onclick="riempiChat(\''.$row['mittente'].'\',\''.$email.'\')">'.$row['mittente'].'</div>';
         }
     }
 
@@ -110,7 +119,9 @@
 if(isset($_POST['sendbutton'])){
     $text = $_POST['message'];
     $dest = $_POST['destinatario'];
-    $email = $_SESSION['email'];
+    //$email = $_GET['email'];
+
+    $email = $_POST['email'];
     $ok=true;
     if(strcmp($dest,"")==0){
         echo '<script type="text/javascript">window.alert("Nessun destinatario selezionato")</script>';
@@ -126,7 +137,7 @@ if(isset($_POST['sendbutton'])){
         $text = mysqli_real_escape_string($con,$text);
         $query = "INSERT INTO message (mittente, destinatario, testo, datames) VALUES ('".$email."','".$dest."','".$text."',FROM_UNIXTIME(".time()."));";
         $res = mysqli_query($con,$query);
-        echo '<script type="text/javascript">riempiChat(\''.$dest.'\')</script>';
+        echo '<script type="text/javascript">riempiChat(\''.$dest.'\',\''.$email.'\')</script>';
     }
 }
 
