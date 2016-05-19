@@ -34,8 +34,7 @@
         }
         */
         $checkPos="";
-        
-        if(!strcmp($disponibili,""))
+        if(!strcmp($disponibili,"")==0)
              $disponibili = " isbn NOT IN(SELECT isbn FROM prestiti p WHERE p.proprietario= l.proprietario)";
         else
             $disponibili="";
@@ -64,7 +63,6 @@
         
 
         $query = "SELECT * FROM librocondiviso l ".$cond.";";
-        
         $res = mysqli_query($con,$query);
         if($res){
             $books=$res;
@@ -84,9 +82,14 @@
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
-                     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse"></script>';
-                    
-
+                    echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse"></script>';
+                    $ISBNs[$row['isbn']] = $row['proprietario'];
+                    /*
+                    $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:".$row['isbn'].$titolo.$autore;
+                    $resp_json = file_get_contents($url);
+                    $resp = json_decode($resp_json, true);
+                    echo '<script type="text/javascript">handleResp2("'.$row['isbn'].'","'.$row['proprietario'].'");</script>';
+            */
             }
         }
 
@@ -94,8 +97,29 @@
     }
     ?>
     
-
+    
   <script type="text/javascript">
+      /*
+     function handleResp2(isbn,propr) {
+            response = <
+           slider = document.getElementById("slider");
+            if(response.totalItems!=0){
+            var item = response.items[0];
+                if(item.volumeInfo.hasOwnProperty("imageLinks"))
+                    copertina = item.volumeInfo.imageLinks.thumbnail;
+                else
+                    copertina = "../res/not_available.png"; 
+                slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"&proprietario="+propr+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+            }
+        if(cont!=nLibri)
+            cont++;
+        else
+            jssor_1_slider_init();
+
+    }
+      
+      */
+      // ---- DEVO INVIARE ANCHE IL PROPRIETARIO, E L'ISBN SAREBBE MEGLIO FOSSE QUELLO DEL LIBRO.
         function handleResponse(response) {
            slider = document.getElementById("slider");
             if(response.totalItems!=0){
@@ -104,37 +128,20 @@
                     copertina = item.volumeInfo.imageLinks.thumbnail;
                 else
                     copertina = "../res/not_available.png";
-                isbn = item.volumeInfo.industryIdentifiers[0].identifier;
-                    slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+                if(item.volumeInfo.industryIdentifiers[0].type =="ISBN_13")
+                    i=0;
+                else 
+                    i=1;
+                isbn = item.volumeInfo.industryIdentifiers[i].identifier;
+                slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
             }
         if(cont!=nLibri)
             cont++;
         else
             jssor_1_slider_init();
 
-        
-                
-                /*
-        document.getElementById("titolo").innerHTML= item.volumeInfo.title;
-        document.getElementById("genere").innerHTML += item.volumeInfo.categories[0];
-        var w= document.getElementById("copertina").clientWidth;
-        var h = document.getElementById("copertina").clientHeight;
-            console.log("Titolo: "+w+" "+h);
-        document.getElementById("copertina").innerHTML=  '<img alt="copertina" src="'+item.volumeInfo.imageLinks.thumbnail+'" width="'+w+'" height="'+h+'">';
-            */
     }
+                
+                
      
-      /* AJAX
-      function bookHandler(book){
-          var xhttp = new XMLHttpRequest();
-          if (xhttp.readyState == 4 && xhttp.status == 200) {
-       // Action to be performed when the document is read;
-        }
-      };
-      xhttp.open("GET", "filename", true);
-      xhttp.send();
-        window.location = 'book.php/?isbn='+book.id;
-          
-      }
-      */
 </script>
