@@ -91,22 +91,31 @@ echo '<script>document.getElementById("luogo").innerHTML += "'.$formatted_addres
     <script>
         function esegui(){
             if(disponibile){
-                url = "php/prestitoLibro.php"
+                url = "php/prestitoLibro.php";
+                richiestaPrestito = true;
             }
             else{
-               url = "php/prenotaLibro.php"
-
+               url = "php/prenotaLibro.php";
+                richiestaPrestito = false;
             }
             $.ajax({
             type: 'POST',
             url: url,
             data: { 
                 'isbn': <?php echo $_GET['isbn']; ?>, 
-                'proprietario': <?php echo "'".$proprietario."'"; ?>
+                'proprietario': <?php echo "'".$proprietario."'"; ?>,
+                'titolo': document.getElementById("titolo").innerHTML
             },
             success: function(msg){
-                window.alert(msg);
                 console.log(msg);
+                if(richiestaPrestito && msg == "Ok"){
+                    window.alert("Contatta "+<?php echo '"'.$proprietario.'"'; ?>+" nella chat per lo scambio!");
+                    window.location.replace("chat.php");
+                }
+                else{
+                   window.alert(msg); 
+                }
+                
             }
         });
         }
