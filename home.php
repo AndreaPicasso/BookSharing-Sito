@@ -13,7 +13,7 @@
                         <input class="input_home" type="text" name="titolo" placeholder="Titolo">
                         <input class="input_home" type="text" name="autore" placeholder="Autore">       
                         <input class="input_home" type="text" name="isbn" placeholder="ISBN">
-                        <input class="input_home" type="checkbox" value="Solo disponibili" name="disponibile" >
+                        Solo disponibili: <input class="input_home" type="checkbox" value="Solo disponibili" name="disponibile" >
                         <br>   
                         <input  type="submit" class="movebutton" name="cerca" value="Cerca" >   
                     </form>

@@ -4,6 +4,8 @@
     <title>Book Sharing</title>
     <link rel="stylesheet" href="css/all.css" type="text/css">
     <link rel="stylesheet" href="css/login.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
 </head>
     
 <body>
@@ -35,7 +37,7 @@
         </tr>
         <tr>
             <td>
-                <div class="singlelink"><a href="login.php/?pswDim=true">Password Dimenticata</a></div>
+                <div class="singlelink" onclick="pswDim()">Password Dimenticata</div>
             </td>
         </tr>
     </table>
@@ -78,31 +80,28 @@
                      
         /*
         if(isset($_GET('pswDim'))){
-            $email = prompt("Inserisci l'email", "");
-            $con = mysqli_connect(SERVER,USER,PSW);
-            mysqli_select_db($con,DB);
-            $newPsw = generateRandomString();
-            $query ="UPDATE user
-            SET password = '".sha1($newPsw)."' WHERE email='".$email."';";
-            $res = mysqli_query($con,$query);
-            require("php/email.php");
-            sendMail($email, "Richiesta Nuova Password", "E' avvenuta la richiesta per una nuova password.<br><br><b>Nuova Password:</b> ".$newPsw);
-            echo '<script type="text/javascript">window.alert("E stata inviata una mail contenente la nuova password.")</script>';
-            mysqli_close($con);
+            
 
         }*/
                      
-    function generateRandomString() {
-        $length = 6;
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
+
     ?>
+    <script>
+        function pswDim(){
+            email = window.prompt("Inserisci email");
+            $.ajax({
+            type: 'POST',
+            url: "php/pswDim.php",  
+            data: {
+                'email': email
+            },
+            success: function(msg){
+                    window.alert(msg);
+                
+            }
+        });
+        }
+    </script>
     
 </body>
 
