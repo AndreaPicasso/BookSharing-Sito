@@ -20,6 +20,7 @@
                <div id="genere"><span class="infoItem">Genere:</span> </div>
                 <div id="stato"><span class="infoItem">Stato:</span> </div>
                 <div id="luogo"><span class="infoItem">Luogo:</span> </div>
+               <div id="rating"><span class="infoItem">Valutazione proprietario:</span> </div>
             </div>
            
            <div id=prenotazione onclick="esegui()">
@@ -56,7 +57,7 @@
     $proprietario = $libro['proprietario'];
 
     
-    //----- OTTENGO INDIRIZZO-3-----
+    //----- OTTENGO INDIRIZZO -------
     $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$libro['latitudine'].",".$libro['longitudine'];
     $resp_json = file_get_contents($url);
     $resp = json_decode($resp_json, true);
@@ -85,7 +86,21 @@ echo '<script>document.getElementById("luogo").innerHTML += "'.$formatted_addres
         disponibile = true;
         </script>';
     }
-
+    //----OTTENGO Valutazione -----
+    
+    $query = "SELECT AVG(voto) as rating
+            FROM valutazione
+            WHERE valutato='".$proprietario."';";
+    $res = mysqli_query($con,$query);
+    $row = mysqli_fetch_assoc($res);
+    if(!strcmp($row['rating'],'')==0){
+     echo '<script>document.getElementById("rating").innerHTML += "'.$row['rating'].' su 5";
+        </script>';
+    }
+    else{
+        echo '<script>document.getElementById("rating").innerHTML += "Nessuna valutazione trovata";
+        </script>';
+    }
     ?>
 
     <script>

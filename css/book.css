@@ -56,6 +56,7 @@
     font-size: 4;
     font-weight: bold;
     margin: 10px;
+   
 }
 
 #prenotazione{
@@ -69,4 +70,8 @@
     margin-top: 35vh;
     border-radius: 10%;
     
+}
+
+#autore, #genere, #stato, #luogo, #rating {
+    margin-top: 3%;
 }
