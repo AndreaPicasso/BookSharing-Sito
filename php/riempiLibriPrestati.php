@@ -1,6 +1,5 @@
 <script>
     function valuta(rating,utente){
-        console.log(rating+" "+utente);
          $.ajax({
             type: 'POST',
             url: "php/valuta.php",
@@ -15,18 +14,68 @@
         
     }
     
-    function restituisci(isbn){
-        console.log(isbn);
-        
+    function restituisci(isbn,propr){
+         $.ajax({
+            type: 'POST',
+            url: "php/restituisci.php",
+            data: { 
+                'isbn':isbn,
+                'proprietario': propr,
+            },
+            success: function(msg){
+               window.alert(msg); 
+            }
+        });
+        window.location.href="account.php";
     }
+        
+    
     
     //Il proprietario è l'utente che clicca
-    function confermaPrestito(isbn){
-        console.log(isbn);
+    function confermaPrestito(isbn,richiedente){
+            $.ajax({
+            type: 'POST',
+            url: "php/confermaPrestito.php",
+            data: { 
+                'isbn':isbn,
+                'richiedente': richiedente,
+            },
+            success: function(msg){
+               window.alert(msg); 
+            }
+        });
+        window.location.href="account.php";
     }
     
-    function confermaRestituzione(isbn){
-        console.log(isbn);
+        function rifiutaPrestito(isbn,richiedente){
+            $.ajax({
+            type: 'POST',
+            url: "php/rifiutaPrestito.php",
+            data: { 
+                'isbn':isbn,
+                'richiedente': richiedente,
+            },
+            success: function(msg){
+               window.alert(msg); 
+            }
+        });
+        window.location.href="account.php";
+    }
+    
+    function confermaRestituzione(isbn,richiedente){
+            //Qui devo controllare se ci sono prenotazioni per il libro
+             $.ajax({
+            type: 'POST',
+            url: "php/confermaRestituzione.php",
+            data: { 
+                'isbn':isbn,
+                'richiedente': richiedente,
+            },
+            success: function(msg){
+               window.alert(msg); 
+            }
+        });
+        window.location.href="account.php";
     }
     
 </script>
@@ -44,7 +93,7 @@
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
         $email = $_SESSION["email"];
-        $query = "SELECT * FROM prestiti  WHERE richiedente='".$email."' AND stato!='storico';";
+        $query = "SELECT * FROM prestiti  WHERE richiedente='".$email."' AND stato='incorso';";
         $res = mysqli_query($con,$query);
         $numrows= mysqli_num_rows($res);
         for($i = 0; $i<$numrows; $i++){
@@ -74,7 +123,7 @@
                     <td>'.$row['dataprestito'].'</td>
                     <td>'.$row['proprietario'].'</td>
                     <td>'.$starsHtml.'</td>
-                    <td><input type="button" id="restituisciLibro" onclick="restituisci('.$row['isbn'].')" value="Restituisci"> </td>
+                    <td><input type="button" id="restituisciLibro" onclick="restituisci('.$row['isbn'].',\''.$row['proprietario'].'\')" value="Restituisci"> </td>
                     </tr>';
 
         }
@@ -120,9 +169,9 @@
             
             $azione="<td></td>";
             if(strcmp($row['stato'],"nonconfermato")==0)
-                $azione = ' <td><input type="button" id="restituisciLibro" onclick="confermaPrestito('.$row['isbn'].')" value="Conferma Prestito"> </td>';
+                $azione = ' <td><input type="button" id="restituisciLibro" onclick="confermaPrestito('.$row['isbn'].',\''.$row['richiedente'].'\')" value="Conferma Prestito"> <input type="button" id="rifiutaPrestito" onclick="rifiutaPrestito('.$row['isbn'].',\''.$row['richiedente'].'\')" value="Rifiuta"> </td>';
             if(strcmp($row['stato'],"inrestituzione")==0)
-                $azione = ' <td><input type="button" id="restituisciLibro" onclick="confermaRestituzione('.$row['isbn'].')" value="Conferma Restituzione"> </td>';
+                $azione = ' <td><input type="button" id="restituisciLibro" onclick="confermaRestituzione('.$row['isbn'].',\''.$row['richiedente'].'\')" value="Conferma Restituzione"> </td>';
 
             echo    '<tr>
                     <td>'.$row['isbn'].'</td>

@@ -12,7 +12,7 @@
     if($res)
         echo "Valutazione effettuata, grazie per il tuo contributo!";
     else
-        echo "Errore, impossibile effettuare valutazione.";
+        echo "Hai già valutato questo utente.";
     
 
 ?>
