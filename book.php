@@ -1,5 +1,5 @@
 <?php     
-        if(!isset($_GET['isbn'])){
+        if(!isset($_GET['isbn']) || !isset($_GET['propr'])){
                header("Location: index.php"); 
             }
         require("parts/header.php");
@@ -50,11 +50,11 @@
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
     $email = $_SESSION["email"];
+    $proprietario = mysqli_real_escape_string($con,$_GET["propr"]);
     // $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."' AND proprietario='".$email."';";
-     $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."';";
+    $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."' AND proprietario='".$proprietario."';";
     $res = mysqli_query($con,$query);
     $libro = mysqli_fetch_assoc($res);
-    $proprietario = $libro['proprietario'];
 
     
     //----- OTTENGO INDIRIZZO -------

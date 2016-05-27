@@ -67,6 +67,8 @@
         if($res){
             $books=$res;
             $rowcount = mysqli_num_rows($res);
+            if($rowcount>10)
+                    $rowcount = 10;
             $rowdim = $rowcount-1;
             $titolo = strtoupper(trim($titolo));
             if(strcmp($titolo,"")!=0){
@@ -82,14 +84,10 @@
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
+                    echo '<script>propr = "'.$row['proprietario'].'";</script>';
                     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse"></script>';
-                    $ISBNs[$row['isbn']] = $row['proprietario'];
-                    /*
-                    $url = "https://www.googleapis.com/books/v1/volumes?q=isbn:".$row['isbn'].$titolo.$autore;
-                    $resp_json = file_get_contents($url);
-                    $resp = json_decode($resp_json, true);
-                    echo '<script type="text/javascript">handleResp2("'.$row['isbn'].'","'.$row['proprietario'].'");</script>';
-            */
+                    // Handle Response NON è un altro thread, è ricorsiva, qui lo script chiama quella funzione, attende la riposta
+                    // chiama handleResponse e poi continua
             }
         }
 
@@ -99,27 +97,7 @@
     
     
   <script type="text/javascript">
-      /*
-     function handleResp2(isbn,propr) {
-            response = <
-           slider = document.getElementById("slider");
-            if(response.totalItems!=0){
-            var item = response.items[0];
-                if(item.volumeInfo.hasOwnProperty("imageLinks"))
-                    copertina = item.volumeInfo.imageLinks.thumbnail;
-                else
-                    copertina = "../res/not_available.png"; 
-                slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"&proprietario="+propr+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
-            }
-        if(cont!=nLibri)
-            cont++;
-        else
-            jssor_1_slider_init();
-
-    }
-      
-      */
-      // ---- DEVO INVIARE ANCHE IL PROPRIETARIO, E L'ISBN SAREBBE MEGLIO FOSSE QUELLO DEL LIBRO.
+    
         function handleResponse(response) {
            slider = document.getElementById("slider");
             if(response.totalItems!=0){
@@ -133,7 +111,8 @@
                 else 
                     i=1;
                 isbn = item.volumeInfo.industryIdentifiers[i].identifier;
-                slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+                console.log(isbn+" "+propr);
+                slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"&propr="+propr+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
             }
         if(cont!=nLibri)
             cont++;
