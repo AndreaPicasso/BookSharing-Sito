@@ -6,10 +6,10 @@
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
     $rating = mysqli_real_escape_string($con,$_POST["rating"]);
-    $valutatore = mysqli_real_escape_string($con,$_POST["valutante"]);
+    $valutatore = mysqli_real_escape_string($con,$_POST["valutatore"]);
     $valutato = mysqli_real_escape_string($con,$_POST["valutato"]);
         
-   $query = "INSERT INTO valutazione (valutato,valutatore,voto) VALUES ('".$valutato."','".$valutante."','".$rating."');";
+   $query = "INSERT INTO valutazione (valutato,valutatore,voto) VALUES ('".$valutato."','".$valutatore."','".$rating."');";
     $response = array('error' =>'Email non trovata');
     $res = mysqli_query($con,$query);
     if($res)
