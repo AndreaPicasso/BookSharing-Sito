@@ -12,7 +12,7 @@
         WHERE richiedente='".$richied."' AND proprietario='".$email."' AND isbn='".$isbn."' AND stato='nonconfermato';";
     $res=mysqli_query($con,$query);
     
-     $text = "Ciao ".$richied."!<br> Mi dispiace, ma il libro che volevi (".$isbn.") <br>Non è al momento disponibile.";
+     $text = "Ciao ".$richied."!<br> Mi dispiace, ma il libro che volevi (isbn: ".$isbn.") <br>Non è al momento disponibile.";
     $query = "INSERT INTO message (mittente, destinatario, testo, datames) VALUES ('".$email."','".$richied."','".$text."',FROM_UNIXTIME(".time()."));";
     $res = mysqli_query($con,$query);
     

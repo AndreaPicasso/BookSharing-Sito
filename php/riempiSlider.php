@@ -63,12 +63,11 @@
         
 
         $query = "SELECT * FROM librocondiviso l ".$cond.";";
+        echo '<script>console.log("'.$query.'");</script>';
         $res = mysqli_query($con,$query);
         if($res){
             $books=$res;
             $rowcount = mysqli_num_rows($res);
-            if($rowcount>10)
-                    $rowcount = 10;
             $rowdim = $rowcount-1;
             $titolo = strtoupper(trim($titolo));
             if(strcmp($titolo,"")!=0){
@@ -78,14 +77,15 @@
                 $autore='+inauthor:'.$autore;
             }
             $autore = strtoupper(trim($autore));
-            echo    '<script type="text/javascript">nLibri='.$rowdim.'; cont=0;
+            echo    '<script type="text/javascript">nLibri='.$rowdim.'; cont=0; contInSlider=0; go=true;
                     </script>';
             //titolo="'.$titolo.'"; autore="'.$autore.'"; 
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
-                    echo '<script>propr = "'.$row['proprietario'].'";</script>';
-                    echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse"></script>';
+                    echo '<script>propr = "'.$row['proprietario'].'";  console.log("https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse");</script>';
+                    echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse">
+                   </script>';
                     // Handle Response NON è un altro thread, è ricorsiva, qui lo script chiama quella funzione, attende la riposta
                     // chiama handleResponse e poi continua
             }
@@ -99,6 +99,7 @@
   <script type="text/javascript">
     
         function handleResponse(response) {
+        if(go){
            slider = document.getElementById("slider");
             if(response.totalItems!=0){
             var item = response.items[0];
@@ -111,13 +112,17 @@
                 else 
                     i=1;
                 isbn = item.volumeInfo.industryIdentifiers[i].identifier;
-                console.log(isbn+" "+propr);
+                //console.log(isbn+" "+propr);
                 slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"&propr="+propr+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
+                contInSlider++;
             }
-        if(cont!=nLibri)
-            cont++;
-        else
-            jssor_1_slider_init();
+            console.log(cont+" "+nLibri);
+            if(cont==nLibri || contInSlider==10 ){
+                    jssor_1_slider_init();
+                    go=false;
+                }
+                cont++;
+        }
 
     }
                 

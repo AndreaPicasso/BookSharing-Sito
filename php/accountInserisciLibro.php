@@ -12,6 +12,8 @@
                 isbn = response.items[0].volumeInfo.industryIdentifiers[0].identifier;
                 console.log(isbn);
                 if (navigator.geolocation) {
+                    console.log("zdfsad");
+                    //DAL SERVER NON LA CHIAMA
                     navigator.geolocation.getCurrentPosition(asyncCall);
                 } else { 
                     window.alert("Geolocazizzazione non supportata.");
@@ -28,6 +30,7 @@
                     var lon = position.coords.longitude;
                     //console.log(lat+" "+lon);
                     xhr = getXMLHttpRequestObject();
+                    console.log("ok");
                     var url = 'php/addBook.php?isbn='+isbn+'&lat='+lat+'&lon='+lon;
                     xhr.onreadystatechange = alertContents;
                     xhr.open('GET', url, true);

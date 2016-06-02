@@ -37,8 +37,7 @@
               else
             {
                 $psw = $user['password'];
-            }
-            
+            }            
             $query = "UPDATE user
             SET nome = '".$nome."', cognome = '".$cogn."', sesso = '".$sesso."',
             genere = '".$genere_pref."', password = '".$psw."'

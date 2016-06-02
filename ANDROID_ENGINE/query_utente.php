@@ -8,7 +8,8 @@
     $email = mysqli_real_escape_string($con,$_POST["email"]);
     $id = trim(mysqli_real_escape_string($con,$_POST["idAccesso"]));
     $psw = trim(mysqli_real_escape_string($con,$_GET["pswAccesso"]));
-
+    
+    if((isset($email) && isset($id) && isset($psw)))
     
    // /!\  MODIFICARE LA TABELLA IN user
     $query = "SELECT * FROM user_prova WHERE email='".$email."';";
@@ -24,7 +25,8 @@
                     'email' => $row['email'],
                     'nome' => $row['nome'],
                     'cognome' => $row['cognome'],
-                    'sesso' => $row['sesso']
+                    'sesso' => $row['sesso'],
+                    'genere' => $row['genere'],
             );
             array_push($item, $i, $temp);
         }
