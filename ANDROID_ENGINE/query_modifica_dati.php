@@ -59,8 +59,7 @@
             genere = '".$genere_pref."', password = '".$psw."'
             WHERE email = '".$email."';";
             $res = mysqli_query($con,$query);
-            if((mysqli_affected_rows($con)-1)!=0){
-                
+            if(mysqli_affected_rows($con)>0){
                 $response = array('ok' =>'Modifica effettuata');
             }
             else
