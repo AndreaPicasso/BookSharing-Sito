@@ -71,12 +71,15 @@
             for($i=0;$i<$rowcount; $i++){
 
                 $row = mysqli_fetch_assoc($res);
-                $query_prestato = "SELECT * FROM librocondiviso WHERE isbn='".$row['isbn']."' 
-                                    AND proprietario='".$row['proprietario']."'
-                                    AND isbn NOT IN(SELECT isbn FROM prestiti WHERE proprietario='".$row['proprietario']."');";
+                $query_prestato = "SELECT *
+                                    FROM librocondiviso INNER JOIN prestiti
+                                    ON librocondiviso.isbn = prestiti.isbn AND librocondiviso.proprietario = prestiti.proprietario
+                                    WHERE librocondiviso.isbn='".$row['isbn']."' AND librocondiviso.proprietario='".$row['proprietario']."'  AND prestiti.stato!='storico';";
                 $prest = mysqli_query($con,$query_prestato);
-                if(mysqli_num_rows($prest)==0){
+
+                if(mysqli_num_rows($prest)!=0){
                     $prest="no";
+                    //Non è disponibile
                 }
                 else{
                     $prest="si";

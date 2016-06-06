@@ -71,7 +71,7 @@ echo '<script>document.getElementById("luogo").innerHTML += "'.$formatted_addres
     $query = "SELECT *
     FROM librocondiviso INNER JOIN prestiti
     ON librocondiviso.isbn = prestiti.isbn AND librocondiviso.proprietario = prestiti.proprietario
-    WHERE librocondiviso.isbn='".$_GET['isbn']."' AND librocondiviso.proprietario='".$proprietario."';";
+    WHERE librocondiviso.isbn='".$_GET['isbn']."' AND librocondiviso.proprietario='".$proprietario."' AND prestiti.stato!='storico';";
     $res = mysqli_query($con,$query);
     $rowcount = mysqli_num_rows($res);
     if($rowcount!=0){

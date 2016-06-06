@@ -1,4 +1,5 @@
 <?php
+ $response = array('error' =>'Non sei connesso al server.');
  if(((isset($_POST['pswAccesso']) && strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0) || isset($_GET['simone'])) 
        && isset($_POST["lat"])  && isset($_POST["lon"])  && isset($_POST["isbn"])  && isset($_POST["proprietario"])){
 
@@ -15,6 +16,7 @@
                     (isbn,proprietario,latitudine,longitudine,datacondivisione)
                     VALUES
                     ("'.$isbn.'","'.$propr.'",'.$lat.','.$lon.',FROM_UNIXTIME('.time().'));';
+            echo $query;
             $res = mysqli_query($con,$query);
      
           if($res)
@@ -22,6 +24,7 @@
             else
                 $response = array('error' =>'Impossibile aggiungere libro');
 
-             echo json_encode($response);
+             
  }
+echo json_encode($response);
 ?>

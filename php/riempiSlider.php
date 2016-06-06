@@ -116,7 +116,7 @@
                 slider.innerHTML += "<div style='display: none;'><a href='book.php?isbn="+isbn+"&propr="+propr+"'><img data-u='image' id='"+isbn+"' src='"+copertina+"'/></a></div>";
                 contInSlider++;
             }
-            console.log(cont+" "+nLibri);
+            //console.log(cont+" "+nLibri);
             if(cont==nLibri || contInSlider==10 ){
                     jssor_1_slider_init();
                     go=false;
