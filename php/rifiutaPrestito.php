@@ -1,6 +1,6 @@
 <?php
-// FINIRE
-    require_once("privateSectionsControl.php");
+
+    require_once("privateSessionControl.php");
     require_once("parameters.php");
     require_once("email.php");
     $isbn = $_POST['isbn'];

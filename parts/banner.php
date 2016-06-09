@@ -4,7 +4,11 @@
           
       }
     function logout(){
-         window.location = 'index.php';
+         
+        $.ajax({url: "php/logout.php",
+                success: function(result){
+                    window.location = 'index.php';
+                }});
           
       }
 

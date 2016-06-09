@@ -1,4 +1,5 @@
 <?php
+    require_once("php/privateSessionControl.php");
       //---------------- MODIFICA DATI -----------------------
       if(isset($_POST['modifica'])){
           if(isset($_POST["nome"])){

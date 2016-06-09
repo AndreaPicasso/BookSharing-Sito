@@ -4,7 +4,7 @@
             }
         require("parts/header.php");
         require("parts/banner_account.php");
-        require("php/privateSectionsControl.php");
+        require("php/privateSessionControl.php");
         require("php/parameters.php");
         ?>
 

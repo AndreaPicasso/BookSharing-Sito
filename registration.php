@@ -4,6 +4,8 @@
     <title>Book Sharing</title>
     <link rel="stylesheet" href="css/all.css" type="text/css">
     <link rel="stylesheet" href="css/registration.css" type="text/css">
+    <link rel="icon" href="res/icona.ico">
+
 </head>
     
 <body>

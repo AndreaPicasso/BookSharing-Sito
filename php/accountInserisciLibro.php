@@ -51,6 +51,7 @@
     </script>
 
     <?php
+    require_once("php/privateSessionControl.php");
     
     if(isset($_POST['inseriscilibro'])){
         $isbn = $_POST['isbn'];

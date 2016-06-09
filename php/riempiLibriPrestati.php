@@ -87,7 +87,7 @@
                 <td>ISBN</td><td>Data</td><td>Proprietario</td><td>Valuta</td><td>Restituisci</td>
             </tr>
     <?php
-    require_once("php/privateSectionsControl.php");
+    require_once("php/privateSessionControl.php");
     require_once("php/parameters.php");
     //-- Libri in lettura 
         $con = mysqli_connect(SERVER,USER,PSW);

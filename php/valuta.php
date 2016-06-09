@@ -1,5 +1,5 @@
 <?php
-    require_once("privateSectionsControl.php");
+    require_once("privateSessionControl.php");
     require_once("parameters.php");
     $rating = $_POST['rating'];
     $valutato = $_POST['valutato'];

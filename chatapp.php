@@ -2,15 +2,16 @@
 
  require("php/parameters.php");?>
 
-   <div id="main">
+   
         <?php
        require("parts/header.php");
-       
+        //Perde i parametri post tra una chiamata e l'altra
         if(!isset($_POST['pswAccesso']) || !strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0 || !isset($_POST['email'])){
             header("Location: index.php");
             }
             
              ?>
+    <div id="main">
         <div id="container_home">
             <span id="chat_container">
                  <span id="chat_content">
@@ -24,10 +25,12 @@
                      -->
                 </span>
                 <div id="writemessage">
-                    <form  action="#" method="post" >
+                    <form  action="" method="post" >
                         Destinatario: <input readonly="text" id="destinatario" name="destinatario" value="">
                         <input type="text" id="message" name="message" placeholder="Scrivi qui il tuo messaggio">
-                       
+                          <input type="hidden" name="pswAccesso" value="<?php echo $_POST['pswAccesso']; ?>" />
+                            <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>" />
+
                         <br>   
                         <input type="submit" id="sendbutton" name="sendbutton" value="Invia" >   
                     </form>
@@ -95,7 +98,7 @@
         $numrows= mysqli_num_rows($res);
         for($i = 0; $i<$numrows; $i++){
             $row = mysqli_fetch_assoc($res);
-             //Riempi la chat con il primo
+             // la chat con il primo
             /*
             if($i==0)
                 $toShow = $row['destinatario'];
@@ -124,7 +127,7 @@ if(isset($_POST['sendbutton'])){
     $email = $_POST['email'];
     $ok=true;
     if(strcmp($dest,"")==0){
-        echo '<script type="text/javascript">window.alert("Nessun destinatario selezionato")</script>';
+       echo '<script type="text/javascript">window.alert("Nessun destinatario selezionato")</script>';
         $ok = false;
     }
     if(strcmp($text,"")==0){
@@ -137,7 +140,7 @@ if(isset($_POST['sendbutton'])){
         $text = mysqli_real_escape_string($con,$text);
         $query = "INSERT INTO message (mittente, destinatario, testo, datames) VALUES ('".$email."','".$dest."','".$text."',FROM_UNIXTIME(".time()."));";
         $res = mysqli_query($con,$query);
-        echo '<script type="text/javascript">riempiChat(\''.$dest.'\',\''.$email.'\')</script>';
+        echo '<script type="text/javascript">riempiChat(\''.$dest.'\',\''.$email.'\');</script>';
     }
 }
 

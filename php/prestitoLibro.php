@@ -1,5 +1,5 @@
 <?php
-    require_once("privateSectionsControl.php");
+    require_once("privateSessionControl.php");
     require_once("parameters.php");
     if(!isset($_POST['isbn'],$_POST['proprietario'])){
            header("Location: ../home.php"); 

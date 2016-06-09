@@ -4,6 +4,8 @@
     <title>Book Sharing</title>
     <link rel="stylesheet" href="css/all.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="icon" href="res/icona.ico">
+
 </head>
     
 <body>
@@ -23,7 +25,7 @@
        <div id="container">
             <div id ="linkutili">
                     <br><br><br>
-                <div class="singlelink"><a href="sdd">Come funziona</a></div>
+                <div class="singlelink"><a href="comefunziona.php">Come funziona</a></div>
                         <br><br><br><br>
                         <div class="singlelink"><a href="registration.php">Registrati</a></div>
             

@@ -1,4 +1,4 @@
-    <?php require("php/privateSectionsControl.php");
+    <?php require("php/privateSessionControl.php");
             require("parts/header.php");
             require("parts/banner.php");?>
 
