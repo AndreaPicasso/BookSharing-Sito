@@ -3,7 +3,7 @@
                header("Location: index.php"); 
             }
         require("parts/header.php");
-        require("parts/banner_account.php");
+        require("parts/banner.php");
         require("php/privateSessionControl.php");
         require("php/parameters.php");
         ?>
@@ -51,9 +51,12 @@
     mysqli_select_db($con,DB);
     $email = $_SESSION["email"];
     $proprietario = mysqli_real_escape_string($con,$_GET["propr"]);
-    // $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."' AND proprietario='".$email."';";
-    $query = "SELECT * FROM librocondiviso  WHERE isbn='".$_GET['isbn']."' AND proprietario='".$proprietario."';";
+    $isbn = mysqli_real_escape_string($con,$_GET['isbn']);
+    
+    $query = "SELECT * FROM librocondiviso  WHERE isbn='".$isbn."' AND proprietario='".$proprietario."';";
     $res = mysqli_query($con,$query);
+    if(mysqli_num_rows($res)==0)
+         header("Location: home.php");
     $libro = mysqli_fetch_assoc($res);
 
     

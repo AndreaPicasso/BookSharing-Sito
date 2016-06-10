@@ -84,3 +84,9 @@ div{
     float: left;
     margin-top: 1%;
 }
+
+.title{
+    font-size: 3vh;
+    margin-bottom: 3vh;
+    font-weight: bold;
+}

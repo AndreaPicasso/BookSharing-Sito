@@ -11,7 +11,7 @@
         echo '<script type="text/javascript">
                 document.getElementById("slider").innerHTML="";</script>';
                 
-        
+        // ----------------- COSTRUISCO QUERY RICERCA ---------------------
         if(strcmp($isbn,"")!=0){
             $isbn = mysqli_real_escape_string($con,$_POST["isbn"]);
             $isbn = " isbn ='".$isbn."'";
@@ -64,6 +64,11 @@
 
         $query = "SELECT * FROM librocondiviso l ".$cond.";";
         echo '<script>console.log("'.$query.'");</script>';
+        
+        
+        //-------------------- MANDO UNA RICHIESTA A GOOGLE PER OGNI ISBN, PER OTTENERE LE INFORMAZIONI -------
+        /* ho comunque bisogno di mandare una richiesta per ogni libro nel db, in quanto in caso di ricerca devo poter cercare
+        nel titolo/autore di ogni libro */
         $res = mysqli_query($con,$query);
         if($res){
             $books=$res;
@@ -83,7 +88,7 @@
             if($rowcount!=0){
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
-                    echo '<script>propr = "'.$row['proprietario'].'";  console.log("https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse");</script>';
+                    echo '<script>propr = "'.$row['proprietario'].'"; </script>';
                     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse">
                    </script>';
                     // Handle Response NON è un altro thread, è ricorsiva, qui lo script chiama quella funzione, attende la riposta

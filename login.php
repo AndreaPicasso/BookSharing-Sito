@@ -80,12 +80,6 @@
             }
         }
                      
-        /*
-        if(isset($_GET('pswDim'))){
-            
-
-        }*/
-                     
 
     ?>
     <script>
