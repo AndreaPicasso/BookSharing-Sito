@@ -45,10 +45,7 @@
             WHERE email = '".$email."';";
             $res = mysqli_query($con,$query);
           
-          // -1 perche non devo contare la row contattata prima
-           // if((mysqli_affected_rows($con)-1)!=0)
           if($res)
-        //if(mysqli_affected_rows($con)>0){
                 echo '<script type="text/javascript">window.alert("Modifica dati effettuata.")</script>';
             else
                 echo '<script type="text/javascript">window.alert("Impossibile modificare i dati, forse il formato è sbagliato?")</script>';

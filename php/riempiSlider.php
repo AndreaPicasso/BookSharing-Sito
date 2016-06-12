@@ -16,23 +16,7 @@
             $isbn = mysqli_real_escape_string($con,$_POST["isbn"]);
             $isbn = " isbn ='".$isbn."'";
         }
-        /*
-        //POSIZIONE
-        if(strcmp($minLat,"")!=0 &&
-            strcmp($maxLat,"")!=0 &&
-          strcmp($minLon,"")!=0 &&
-          strcmp($maxLon,"")!=0){
-            $minLat = mysqli_real_escape_string($con,$_POST["minLat"]);
-            $minLon = mysqli_real_escape_string($con,$_POST["minLon"]);
-            $maxLat = mysqli_real_escape_string($con,$_POST["maxLat"]);
-            $maxLon = mysqli_real_escape_string($con,$_POST["maxLon"]);
-            
-            $checkPos=" latitudine<= '".$maxLat."' AND latitudine>= '".$minLat."'AND longitudine<= '".$maxLon."' AND longitudine>= '".$minLon."'";
-        }
-        else{
-            $checkPos="";
-        }
-        */
+        
         $checkPos="";
         if(!strcmp($disponibili,"")==0)
              $disponibili = " isbn NOT IN(SELECT isbn FROM prestiti p WHERE p.proprietario= l.proprietario)";
@@ -63,7 +47,7 @@
         
 
         $query = "SELECT * FROM librocondiviso l ".$cond.";";
-        echo '<script>console.log("'.$query.'");</script>';
+        //echo '<script>console.log("'.$query.'");</script>';
         
         
         //-------------------- MANDO UNA RICHIESTA A GOOGLE PER OGNI ISBN, PER OTTENERE LE INFORMAZIONI -------
@@ -89,7 +73,7 @@
                 for($i=0;$i<$rowcount; $i++){
                     $row = mysqli_fetch_assoc($res);
                     echo '<script>propr = "'.$row['proprietario'].'"; </script>';
-                    echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&callback=handleResponse">
+                    echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$row['isbn'].$titolo.$autore.'&key='.APIkey.'&callback=handleResponse">
                    </script>';
                     // Handle Response NON è un altro thread, è ricorsiva, qui lo script chiama quella funzione, attende la riposta
                     // chiama handleResponse e poi continua

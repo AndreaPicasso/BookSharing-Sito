@@ -93,15 +93,14 @@ if($ok && $submit)
     $mySurname = mysqli_real_escape_string($con,$_POST["cognome"]);
     $myPsw = mysqli_real_escape_string($con,$_POST["psw"]);
     $myPsw =sha1($myPsw);
-    $control = "SELECT * FROM user WHERE email='".$myEmail."';";
-    $res = mysqli_query($con,$control);
-    if(mysqli_num_rows($res)==0){
-        $query = "INSERT INTO user (email,nome,cognome,password) VALUES ('".$myEmail."','".$myName."','".$mySurname."','".$myPsw."');";
-        $res = mysqli_query($con,$query);
+    //Non serve controllo email già utilizzata, se già utilizzata fallisce la query
+    $query = "INSERT INTO user (email,nome,cognome,password) VALUES ('".$myEmail."','".$myName."','".$mySurname."','".$myPsw."');";
+    $res = mysqli_query($con,$query);
+    if($res){
         require("php/email.php");
         sendMail($myEmail, "Iscrizione", "Congratulazioni!<br>".$myName." ".$mySurname." ti sei iscritto a BookSharing.");
        header("Location: index.php");
-    }
+    }    
     else
     {
         echo '<script type="text/javascript">window.alert("Email gia utilizzata")</script>';

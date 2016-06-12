@@ -12,8 +12,7 @@
                 isbn = response.items[0].volumeInfo.industryIdentifiers[0].identifier;
                 console.log(isbn);
                 if (navigator.geolocation) {
-                    console.log("zdfsad");
-                    //DAL SERVER NON LA CHIAMA
+                    //PER ESSERE CHIAMATA RICHIEDE IL PROTOCOLLO HTTPS
                     navigator.geolocation.getCurrentPosition(asyncCall);
                 } else { 
                     window.alert("Geolocazizzazione non supportata.");
@@ -56,7 +55,7 @@
     if(isset($_POST['inseriscilibro'])){
         $isbn = $_POST['isbn'];
         if(!strcmp(trim($isbn),"")==0){
-            echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$isbn.'&callback=handleResponse">
+            echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$isbn.'&key='.APIkey.'&callback=handleResponse">
             </script>';
         }
         else

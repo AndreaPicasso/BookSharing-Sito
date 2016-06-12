@@ -3,11 +3,12 @@
     require_once("privateSessionControl.php");
     require_once("parameters.php");
     require_once("email.php");
-    $isbn = $_POST['isbn'];
-    $richied = $_POST['richiedente'];
     $email = $_SESSION['email'];
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
+    $isbn = mysqli_real_escape_string($con,$_POST['isbn']);
+    $richied = mysqli_real_escape_string($con,$_POST['richiedente']);
+    
     $query = "DELETE FROM prestiti
         WHERE richiedente='".$richied."' AND proprietario='".$email."' AND isbn='".$isbn."' AND stato='nonconfermato';";
     $res=mysqli_query($con,$query);
@@ -15,7 +16,8 @@
      $text = "Ciao ".$richied."!<br> Mi dispiace, ma il libro che volevi (isbn: ".$isbn.") <br>Non è al momento disponibile.";
     $query = "INSERT INTO message (mittente, destinatario, testo, datames) VALUES ('".$email."','".$richied."','".$text."',FROM_UNIXTIME(".time()."));";
     $res = mysqli_query($con,$query);
-    
+    echo "Hai rifiutato il prestito.";
+
 
 
     //Se c'è qualche prenotazione, avvisa

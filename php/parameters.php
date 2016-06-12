@@ -4,6 +4,7 @@
 define("SERVER", "localhost");
 define("DB", "S3940125");
 
+define("APIkey", "AIzaSyBRCubp0RFQ_EgffojAOC8jf7fxjMPGXHg");
 
 
 /*

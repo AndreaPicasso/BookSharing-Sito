@@ -2,11 +2,12 @@
     require_once("privateSessionControl.php");
     require_once("parameters.php");
     require_once("email.php");
-    $isbn = $_POST['isbn'];
-    $propr = $_POST['proprietario'];
+
     $email = $_SESSION['email'];
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
+    $isbn = mysqli_real_escape_string($con,$_POST['isbn']);
+    $propr = mysqli_real_escape_string($con,$_POST['proprietario']);
     $query =    "UPDATE prestiti
                 SET stato='inrestituzione'
                 WHERE richiedente='".$email."' AND proprietario='".$propr."' AND isbn='".$isbn."' AND stato='incorso';";

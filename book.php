@@ -46,7 +46,7 @@
         
     </script>
     <?php
-     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_GET['isbn'].'&callback=handleResponse"></script>';
+     echo '<script type="text/javascript" src="https://www.googleapis.com/books/v1/volumes?q=isbn:'.$_GET['isbn'].'&callback=handleResponse&key='.APIkey.'"></script>';
     $con = mysqli_connect(SERVER,USER,PSW);
     mysqli_select_db($con,DB);
     $email = $_SESSION["email"];
@@ -97,7 +97,7 @@ echo '<script>document.getElementById("luogo").innerHTML += "'.$formatted_addres
     $res = mysqli_query($con,$query);
     $row = mysqli_fetch_assoc($res);
     if(!strcmp($row['rating'],'')==0){
-     echo '<script>document.getElementById("rating").innerHTML += "'.$row['rating'].' su 5";
+     echo '<script>document.getElementById("rating").innerHTML += "'.number_format($row['rating'], 1, '.', '').' su 5";
         </script>';
     }
     else{
@@ -120,12 +120,12 @@ echo '<script>document.getElementById("luogo").innerHTML += "'.$formatted_addres
             type: 'POST',
             url: url,
             data: { 
-                'isbn': <?php echo $_GET['isbn']; ?>, 
+                'isbn': <?php echo $isbn; ?>, 
                 'proprietario': <?php echo "'".$proprietario."'"; ?>,
                 'titolo': document.getElementById("titolo").innerHTML
             },
             success: function(msg){
-                console.log(msg);
+                //console.log(msg);
                 if(richiestaPrestito && msg == "Ok"){
                     window.alert("Contatta "+<?php echo '"'.$proprietario.'"'; ?>+" nella chat per lo scambio!");
                     window.location.replace("chat.php");

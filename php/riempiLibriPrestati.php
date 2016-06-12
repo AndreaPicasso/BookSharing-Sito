@@ -37,7 +37,7 @@
             type: 'POST',
             url: "php/confermaPrestito.php",
             data: { 
-                'isbn':isbn,
+                'isbn':isbn, 
                 'richiedente': richiedente,
             },
             success: function(msg){
@@ -81,7 +81,7 @@
 </script>
 
 <div id="libri">
-        LIBRI IN LETTURA
+        <p class="title">LIBRI IN LETTURA</p>
         <table>
             <tr>
                 <td>ISBN</td><td>Data</td><td>Proprietario</td><td>Valuta</td><td>Restituisci</td>
@@ -134,7 +134,7 @@
             </table>
     </div>  
     <div id="libri">
-    LIBRI IN PRESTITO
+    <p class="title">LIBRI IN PRESTITO</p>
                     <table>
             <tr>
                 <td>ISBN</td><td>Data</td><td>Richiedente</td><td>Valuta</td><td>Azione</td>
