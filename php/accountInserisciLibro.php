@@ -9,14 +9,24 @@
         */
         function handleResponse(response) {
         if(response.totalItems!=0){
-                isbn = response.items[0].volumeInfo.industryIdentifiers[0].identifier;
-                console.log(isbn);
-                if (navigator.geolocation) {
-                    //PER ESSERE CHIAMATA RICHIEDE IL PROTOCOLLO HTTPS
-                    navigator.geolocation.getCurrentPosition(asyncCall);
-                } else { 
-                    window.alert("Geolocazizzazione non supportata.");
+                j=-1;
+                if(response.items[0].volumeInfo.industryIdentifiers[0].type == "ISBN_13")
+                    j=0;
+                else if(response.items[0].volumeInfo.industryIdentifiers[1].type == "ISBN_13")
+                    j=1;
+                if(j!=-1){
+                        isbn = response.items[0].volumeInfo.industryIdentifiers[j].identifier;
+                        console.log(isbn);
+                    if (navigator.geolocation) {
+                        //PER ESSERE CHIAMATA RICHIEDE IL PROTOCOLLO HTTPS
+                        navigator.geolocation.getCurrentPosition(asyncCall);
+                    } else { 
+                        window.alert("Geolocazizzazione non supportata.");
+                    }
                 }
+            else{
+                  window.alert("ISBN non trovato.");
+            }     
         }
         else{
                   window.alert("ISBN non trovato.");

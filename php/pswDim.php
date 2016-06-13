@@ -1,5 +1,5 @@
 <?php
-    require_once("php/privateSessionControl.php");
+    require_once("privateSessionControl.php");
     require("parameters.php");
     $email = $_POST['email'];
     $con = mysqli_connect(SERVER,USER,PSW);
