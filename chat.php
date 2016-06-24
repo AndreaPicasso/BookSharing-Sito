@@ -50,8 +50,7 @@ require("parts/header.php");
         xhr = getXMLHttpRequestObject();
 
         xhr.open("GET", "php/riempiChat.php/?other="+other, false);
-
-            xhr.send(); 
+        xhr.send(); 
  
 
         if (xhr.readyState==4 && xhr.status==200) { 
@@ -124,6 +123,7 @@ if(isset($_POST['sendbutton'])){
     if($ok){
          $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
+        $dest = mysqli_real_escape_string($con,$dest);
         $text = mysqli_real_escape_string($con,$text);
         $query = "INSERT INTO message (mittente, destinatario, testo, datames) VALUES ('".$email."','".$dest."','".$text."',FROM_UNIXTIME(".time()."));";
         $res = mysqli_query($con,$query);

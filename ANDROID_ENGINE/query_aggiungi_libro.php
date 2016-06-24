@@ -16,7 +16,6 @@
                     (isbn,proprietario,latitudine,longitudine,datacondivisione)
                     VALUES
                     ("'.$isbn.'","'.$propr.'",'.$lat.','.$lon.',FROM_UNIXTIME('.time().'));';
-            echo $query;
             $res = mysqli_query($con,$query);
      
           if($res)

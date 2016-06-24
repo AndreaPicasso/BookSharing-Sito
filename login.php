@@ -69,7 +69,7 @@
                 $query = "SELECT * FROM user WHERE email='".$myEmail."' and password='".$myPsw."';";
                 $res = mysqli_query($con,$query);
                 if(mysqli_num_rows($res)!=0){
-                     $_SESSION["email"]=$myEmail;
+                    $_SESSION["email"]=$myEmail;
                     $_SESSION["login"]="true";
                     header("Location: home.php");
                 }

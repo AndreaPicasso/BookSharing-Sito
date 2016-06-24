@@ -1,6 +1,6 @@
 <?php
         /* Global */
-        $books;
+    //$books;
     function riempiSlider($isbn,$titolo,$autore,$disponibili){
         //linko costanti da altro file
         
@@ -55,7 +55,7 @@
         nel titolo/autore di ogni libro */
         $res = mysqli_query($con,$query);
         if($res){
-            $books=$res;
+            //$books=$res;
             $rowcount = mysqli_num_rows($res);
             $rowdim = $rowcount-1;
             $titolo = strtoupper(trim($titolo));

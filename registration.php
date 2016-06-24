@@ -57,8 +57,6 @@
     
 
 <?php
-  
-    
     $submit =isset($_POST["email"], $_POST["nome"], $_POST["cognome"], $_POST["psw"], $_POST["repsw"]);
     $ok=true;
      if($submit && trim($_POST["email"])==""){

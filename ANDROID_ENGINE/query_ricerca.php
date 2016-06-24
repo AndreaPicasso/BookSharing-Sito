@@ -1,7 +1,7 @@
 <?php
     session_start();
     //if((isset($_SESSION['loginAndroid']) && strcmp($_SESSION['loginAndroid'],"true")==0) || isset($_GET['simone'])){
-    if((isset($_POST['pswAccesso']) && strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0) || isset($_GET['simone'])){
+    if(isset($_POST['pswAccesso']) && strcmp($_POST['pswAccesso'],"Azet325K54fA32w")==0){
         require_once("../php/parameters.php");
         $con = mysqli_connect(SERVER,USER,PSW);
         mysqli_select_db($con,DB);
@@ -22,7 +22,7 @@
             $maxLat = mysqli_real_escape_string($con,$_POST["maxLat"]);
             $maxLon = mysqli_real_escape_string($con,$_POST["maxLon"]);
             
-            $checkPos=" latitudine<= '".$maxLat."' AND latitudine>= '".$minLat."'AND longitudine<= '".$maxLon."' AND longitudine>= '".$minLon."'";
+            $checkPos=" latitudine<= '".$maxLat."' AND latitudine>= '".$minLat."' AND longitudine<= '".$maxLon."' AND longitudine>= '".$minLon."';";
         }
         else{
             $checkPos="";
@@ -61,7 +61,6 @@
 
         
         $query = "SELECT * FROM librocondiviso l ".$cond.";";
-    
         $res = mysqli_query($con,$query);
         if($res){
         $rowcount = mysqli_num_rows($res);
